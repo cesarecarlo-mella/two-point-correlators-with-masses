@@ -1,0 +1,2 @@
+{j[topo1, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+   (n4_)?Positive, (n5_)?Positive] :> Expand[j[topo1, n2, n1, n3, n5, n4]]}

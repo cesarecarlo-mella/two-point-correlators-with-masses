@@ -1,0 +1,6 @@
+{j[topo1, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+   (n4_)?NonPositive, (n5_)?Positive] :> 
+  Expand[j[topo1, n4, n2, 0, n1, n5]/(j[topo1, -1, 0, 0, 0, 0] + 
+      j[topo1, 0, -1, 0, 0, 0] - j[topo1, 0, 0, -1, 0, 0] + 
+      j[topo1, 0, 0, 0, -1, 0] + j[topo1, 0, 0, 0, 0, -1] + 
+      (2*m2 - pp)*j[topo1, 0, 0, 0, 0, 0])^n3]}

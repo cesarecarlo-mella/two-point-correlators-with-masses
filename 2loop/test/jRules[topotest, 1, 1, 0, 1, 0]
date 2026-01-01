@@ -1,0 +1,13 @@
+Last[{{{1, 1, -1, 1, -1}, {0, 0, -1, 0, -1}, {-1, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0}, {0, 0, 1, 0, 0}}, 
+  {j[topotest, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?NonPositive] /; True :> 
+    -1/2*(n5*j[topotest, n1, n2, -1 + n3, n4, 1 + n5])/(d - n1 - n3 - 2*n4) + 
+     (n5*j[topotest, n1, n2, n3, -1 + n4, 1 + n5])/(2*(d - n1 - n3 - 2*n4)) - 
+     (n5*(m2 - pp)*j[topotest, n1, n2, n3, n4, 1 + n5])/
+      (2*(d - n1 - n3 - 2*n4)) - (n3*j[topotest, n1, n2, 1 + n3, -1 + n4, 
+        n5])/(-d + n1 + n3 + 2*n4) - 
+     (n3*(m2 - pp)*j[topotest, n1, n2, 1 + n3, n4, n5])/
+      (-d + n1 + n3 + 2*n4) + (n1*j[topotest, 1 + n1, -1 + n2, n3, n4, n5])/
+      (-d + n1 + n3 + 2*n4) - (n1*j[topotest, 1 + n1, n2, n3, -1 + n4, n5])/
+      (-d + n1 + n3 + 2*n4)}}]
