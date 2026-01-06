@@ -1,0 +1,17 @@
+digraph topo1_2_20 {
+  label="topo1_2_20";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 1 [label="(p1,pp;1)"];
+    -2 -> 1 [label="(-p1,pp;2)"];
+    2 -> 2 [label="(k1+k2,m2;5)"];
+    3 -> 3 [label="(k2+p1,m2;7)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+3 [shape=point];
+}
+
