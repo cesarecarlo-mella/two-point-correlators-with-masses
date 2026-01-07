@@ -1,0 +1,56 @@
+{-(#4*j[familyAllMass, -1 + #1, #2, #3, 1 + #4, #5]) - 
+   #3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5] + 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] + 
+   (d - 2*#1 - #3 - #4)*j[familyAllMass, #1, #2, #3, #4, #5] - 
+   #4*(m12 + m42 - pp)*j[familyAllMass, #1, #2, #3, 1 + #4, #5] - 
+   (m12 - m22 + m32)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] - 
+   2*m12*#1*j[familyAllMass, 1 + #1, #2, #3, #4, #5], 
+  -(#3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5]) + 
+   #2*j[familyAllMass, -1 + #1, 1 + #2, #3, #4, #5] + 
+   #5*j[familyAllMass, #1, -1 + #2, #3, #4, 1 + #5] + 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] - 
+   #5*j[familyAllMass, #1, #2, -1 + #3, #4, 1 + #5] + 
+   #5*j[familyAllMass, #1, #2, #3, -1 + #4, 1 + #5] + 
+   (#2 - #3)*j[familyAllMass, #1, #2, #3, #4, #5] + 
+   #5*(m22 - m32 + m42 - pp)*j[familyAllMass, #1, #2, #3, #4, 1 + #5] - 
+   (m12 - m22 + m32)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] - 
+   #2*j[familyAllMass, #1, 1 + #2, -1 + #3, #4, #5] + 
+   (m12 + m22 - m32)*#2*j[familyAllMass, #1, 1 + #2, #3, #4, #5], 
+  #4*j[familyAllMass, -1 + #1, #2, #3, 1 + #4, #5] + 
+   #3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5] - 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] - 
+   #4*j[familyAllMass, #1, #2, -1 + #3, 1 + #4, #5] + 
+   (#1 - #3)*j[familyAllMass, #1, #2, #3, #4, #5] + 
+   #4*j[familyAllMass, #1, #2, #3, 1 + #4, -1 + #5] + 
+   #4*(m12 - m32 + m52 - pp)*j[familyAllMass, #1, #2, #3, 1 + #4, #5] + 
+   (m12 - m22 - m32)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] + 
+   #1*j[familyAllMass, 1 + #1, -1 + #2, #3, #4, #5] - 
+   #1*j[familyAllMass, 1 + #1, #2, -1 + #3, #4, #5] + 
+   (m12 + m22 - m32)*#1*j[familyAllMass, 1 + #1, #2, #3, #4, #5], 
+  #3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5] - 
+   #5*j[familyAllMass, #1, -1 + #2, #3, #4, 1 + #5] - 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] + 
+   (d - 2*#2 - #3 - #5)*j[familyAllMass, #1, #2, #3, #4, #5] - 
+   #5*(m22 + m52 - pp)*j[familyAllMass, #1, #2, #3, #4, 1 + #5] + 
+   (m12 - m22 - m32)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] - 
+   2*m22*#2*j[familyAllMass, #1, 1 + #2, #3, #4, #5], 
+  -(#4*j[familyAllMass, -1 + #1, #2, #3, 1 + #4, #5]) - 
+   #3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5] + 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] + 
+   (-#1 + #4)*j[familyAllMass, #1, #2, #3, #4, #5] - 
+   #4*(m12 - m42 - pp)*j[familyAllMass, #1, #2, #3, 1 + #4, #5] + 
+   #3*j[familyAllMass, #1, #2, 1 + #3, -1 + #4, #5] - 
+   #3*j[familyAllMass, #1, #2, 1 + #3, #4, -1 + #5] - 
+   (m12 - m22 - m42 + m52)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] + 
+   #1*j[familyAllMass, 1 + #1, #2, #3, -1 + #4, #5] - 
+   #1*(m12 - m42 + pp)*j[familyAllMass, 1 + #1, #2, #3, #4, #5], 
+  -(#3*j[familyAllMass, -1 + #1, #2, 1 + #3, #4, #5]) + 
+   #5*j[familyAllMass, #1, -1 + #2, #3, #4, 1 + #5] + 
+   #3*j[familyAllMass, #1, -1 + #2, 1 + #3, #4, #5] + 
+   (#2 - #5)*j[familyAllMass, #1, #2, #3, #4, #5] + 
+   #5*(m22 - m52 - pp)*j[familyAllMass, #1, #2, #3, #4, 1 + #5] + 
+   #3*j[familyAllMass, #1, #2, 1 + #3, -1 + #4, #5] - 
+   #3*j[familyAllMass, #1, #2, 1 + #3, #4, -1 + #5] - 
+   (m12 - m22 - m42 + m52)*#3*j[familyAllMass, #1, #2, 1 + #3, #4, #5] - 
+   #2*j[familyAllMass, #1, 1 + #2, #3, #4, -1 + #5] + 
+   #2*(m22 - m52 + pp)*j[familyAllMass, #1, 1 + #2, #3, #4, #5]} & 

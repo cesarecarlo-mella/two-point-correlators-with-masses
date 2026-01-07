@@ -1,0 +1,5 @@
+{1, {"res" -> {j[topo1, 0, 0, 0, 1, 1], m2*j[topo1, 0, 0, 1, 1, 1], 
+    Sqrt[4*m2 - pp]*Sqrt[pp]*j[topo1, 0, 1, 0, 1, 1], 
+    j[topo1, 0, 1, 1, 1, 0], TerminatedEvaluation["RecursionLimit"], 
+    m2*Sqrt[pp*(-4*m2 + pp)]*j[topo1, 0, 1, 1, 1, 1], 
+    (-4*m2 + pp)*j[topo1, 1, 1, 0, 1, 1], pp*j[topo1, 1, 1, 1, 1, 1]}}}

@@ -1,0 +1,3 @@
+{{j[familyAllMass, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[familyAllMass, n1, n2, n3, n4, n5]]}}
