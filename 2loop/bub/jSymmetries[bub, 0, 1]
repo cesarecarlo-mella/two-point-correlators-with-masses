@@ -1,0 +1,4 @@
+{{j[bub, (n1_)?NonPositive, (n2_)?Positive] :> 
+   Expand[j[bub, 0, n2]/(-j[bub, -1, 0] + 2*j[bub, 0, -1] + 
+       2*pp*j[bub, 0, 0])^n1]}, {j[bub, (n1_)?NonPositive, (n2_)?Positive] :> 
+   Expand[j[bub, n1, n2]]}}

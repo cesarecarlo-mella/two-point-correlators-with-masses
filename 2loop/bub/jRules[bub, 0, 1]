@@ -1,0 +1,9 @@
+Last[{{{-1, 1}, {-1, 0}}, {j[bub, (n1_)?NonPositive, (n2_)?Positive] /; 
+     n2 != 1 :> ((2 + d - n1 - 2*n2)*j[bub, n1, -1 + n2])/(2*m2*(-1 + n2)) - 
+     (n1*j[bub, 1 + n1, -2 + n2])/(2*m2*(-1 + n2)) - 
+     (n1*(2*m2 - pp)*j[bub, 1 + n1, -1 + n2])/(2*m2*(-1 + n2)), 
+   j[bub, (n1_)?NonPositive, (n2_)?Positive] /; n2 == 1 && n1 != 0 :> 
+    (n1*j[bub, 1 + n1, 0])/(-2 + d - n1) + 
+     ((-3*pp + d*pp - 2*n1*pp)*j[bub, 1 + n1, 1])/(-2 + d - n1) + 
+     ((1 + n1)*(2*m2 - pp)*j[bub, 2 + n1, 0])/(-2 + d - n1) - 
+     ((1 + n1)*(4*m2 - pp)*pp*j[bub, 2 + n1, 1])/(-2 + d - n1)}}]

@@ -1,0 +1,84 @@
+BasisDirectory[bub] = StringDrop[DirectoryName[$Input], -1]
+bub /: BasisSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "BasisSectors[bub]"}]]
+bub /: CurrentState[bub] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+bub /: CutDs[bub] := {0, 0}
+bub /: Definitions[bub] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+bub /: Ds[bub] := {-m2 + sp[k1, k1], -m2 + pp + sp[k1, k1] + 2*sp[k1, p]}
+bub /: DsBasisQ[bub] := True
+bub /: EMs[bub] := {p}
+bub /: ExtMappedSectors[bub] := {}
+bub /: ExtSectorsMappings[bub] := {}
+bub /: IBP[bub] := Get[FileNameJoin[{BasisDirectory[bub], "IBP[bub]"}]]
+bub /: Information[bub] := (If[ValueQ[bub::usage], 
+    Information[bub, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[bub] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[bub, __]]] :> 
+           HoldForm[LiteRed`Private`f$[bub, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[bub, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  bub], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+bub /: jRules[bub, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "jRules[bub, 0, 1]"}]]
+bub /: jRules[bub, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "jRules[bub, 1, 0]"}]]
+bub /: jRules[bub, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "jRules[bub, 1, 1]"}]]
+bub /: jsOrder[bub] := {"np", "cp", "-ds", "-ns"}
+bub /: jsOrder[bub, 0, 0] := {{-1, -1}, {1, 0}}
+bub /: jsOrder[bub, 0, 1] := {{-1, 1}, {-1, 0}}
+bub /: jsOrder[bub, 1, 0] := {{1, -1}, {0, -1}}
+bub /: jsOrder[bub, 1, 1] := {{1, 1}, {-1, 0}}
+bub /: jSymmetries[bub, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "jSymmetries[bub, 0, 1]"}]]
+bub /: jSymmetries[bub, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "jSymmetries[bub, 1, 1]"}]]
+bub /: LI[bub] := Get[FileNameJoin[{BasisDirectory[bub], "LI[bub]"}]]
+bub /: LMs[bub] := {k1}
+bub /: MappedSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "MappedSectors[bub]"}]]
+bub /: MIs[bub] := Get[FileNameJoin[{BasisDirectory[bub], "MIs[bub]"}]]
+bub /: NDs[bub] := 2
+bub /: NonZeroSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "NonZeroSectors[bub]"}]]
+bub /: Parameters[bub] := {m2, pp, d}
+bub /: PowerShifts[bub] := {0, 0}
+bub /: SectorsMappings[bub] := {js[bub, 1, 0] -> js[bub, 0, 1]}
+bub /: SectorsPattern[bub] := {___}
+bub /: SimpleSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "SimpleSectors[bub]"}]]
+bub /: SPs[bub] := {sp[k1, k1], sp[k1, p]}
+bub /: SR[bub] := Get[FileNameJoin[{BasisDirectory[bub], "SR[bub]"}]]
+bub /: Toj[bub] := {sp[k1, k1] -> m2 + j[bub, -1, 0], 
+   sp[k1, p] -> (-pp - j[bub, -1, 0] + j[bub, 0, -1])/2}
+bub /: UniqueSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "UniqueSectors[bub]"}]]
+bub /: ZerojRule[bub] := LiteRed`Private`jjj:j[bub, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ {{0, 0}}]
+bub /: ZeroSectors[bub] := 
+  Get[FileNameJoin[{BasisDirectory[bub], "ZeroSectors[bub]"}]]
+bub /: SectorsMappings[bub, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[bub], HoldPattern[js[bub, LiteRed`Private`ns$] -> _]]
+bub::usage = "1-loop basis with 1 external momenta.\nUse Information[bub] to \
+get basis summary.\nThis string can be redefined by setting \
+bub::usage=\"\[Ellipsis]\""; Information[bub, LongForm -> False]; 
+LiteRed`Private`CheckDefs[bub]
+BasisDirectory[bub]

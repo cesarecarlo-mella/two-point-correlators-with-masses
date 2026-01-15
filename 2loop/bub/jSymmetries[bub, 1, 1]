@@ -1,0 +1,2 @@
+{{j[bub, (n1_)?Positive, (n2_)?Positive] :> Expand[j[bub, n1, n2]]}, 
+ {j[bub, (n1_)?Positive, (n2_)?Positive] :> Expand[j[bub, n2, n1]]}}
