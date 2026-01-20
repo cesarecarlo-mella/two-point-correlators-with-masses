@@ -1,0 +1,21 @@
+repeat;
+id prop(k1)*Sector(topoA,n1?,n2?) =1/D1*Sector(topoA,n1,n2);
+id prop(k2)*Sector(topoA,n1?,n2?) =1/D2*Sector(topoA,n1,n2);
+id prop(k3)*Sector(topoA,n1?,n2?) =1/D3*Sector(topoA,n1,n2);
+id prop(k1 - p1)*Sector(topoA,n1?,n2?) =1/D4*Sector(topoA,n1,n2);
+id prop(k2 - p1)*Sector(topoA,n1?,n2?) =1/D5*Sector(topoA,n1,n2);
+id prop(k3 - p1)*Sector(topoA,n1?,n2?) =1/D6*Sector(topoA,n1,n2);
+id prop(k1 - k2)*Sector(topoA,n1?,n2?) =1/D7*Sector(topoA,n1,n2);
+id prop(k1 - k3)*Sector(topoA,n1?,n2?) =1/D8*Sector(topoA,n1,n2);
+id prop(k2 - k3)*Sector(topoA,n1?,n2?) =1/D9*Sector(topoA,n1,n2);
+id prop(k1)*Sector(topoB,n1?,n2?) =1/D1*Sector(topoB,n1,n2);
+id prop(k2)*Sector(topoB,n1?,n2?) =1/D2*Sector(topoB,n1,n2);
+id prop(k3)*Sector(topoB,n1?,n2?) =1/D3*Sector(topoB,n1,n2);
+id prop(k1 - p1)*Sector(topoB,n1?,n2?) =1/D4*Sector(topoB,n1,n2);
+id prop(k2 - p1)*Sector(topoB,n1?,n2?) =1/D5*Sector(topoB,n1,n2);
+id prop(k3 - p1)*Sector(topoB,n1?,n2?) =1/D6*Sector(topoB,n1,n2);
+id prop(k1 - k3)*Sector(topoB,n1?,n2?) =1/D7*Sector(topoB,n1,n2);
+id prop(k2 - k3)*Sector(topoB,n1?,n2?) =1/D8*Sector(topoB,n1,n2);
+id prop(k1 + k2 - k3 - p1)*Sector(topoB,n1?,n2?) =1/D9*Sector(topoB,n1,n2);
+endrepeat;
+.sort
