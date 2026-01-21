@@ -1,0 +1,368 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     14363,        360]
+NotebookOptionsPosition[     12954,        330]
+NotebookOutlinePosition[     13400,        348]
+CellTagsIndexPosition[     13357,        345]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.955201172307434*^9, 3.9552011728938437`*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"9c6142cc-d410-45dc-a959-19cb26e5df1e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.955246227173371*^9, 3.955246234924554*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"1533e6bd-f615-4d14-9c7c-48c88074d61f"],
+
+Cell[BoxData["\<\"/Users/cesarecarlomella/Documents/GitHub/two-point-\
+correlators-with-masses/3loop\"\>"], "Output",
+ CellChangeTimes->{
+  3.958461362111985*^9, {3.958624436419961*^9, 3.958624443207295*^9}, 
+   3.958794004950688*^9, 3.9755742363271646`*^9, 3.9755746458489847`*^9, 
+   3.975575484909628*^9, 3.975638109782898*^9, 3.9756382119257097`*^9, 
+   3.975638313364664*^9, 3.976253451863867*^9, 3.976685720412387*^9, 
+   3.976692339297164*^9, 3.976698091337387*^9, 3.976710006996818*^9, 
+   3.976711254822768*^9, 3.976766762380198*^9, 3.976767256802382*^9, 
+   3.9767673300017557`*^9, 3.97676788274586*^9, 3.976767947602602*^9, 
+   3.976772792448823*^9, 3.976858640496435*^9, 3.9768618158907557`*^9, 
+   3.976873438992621*^9, 3.976881380112712*^9, 3.977294628306567*^9, {
+   3.977302150484047*^9, 3.9773021646390667`*^9}, {3.977302523031654*^9, 
+   3.977302526665313*^9}, {3.977323540211097*^9, 3.977323544270873*^9}, 
+   3.9773236356172247`*^9, {3.97732443591751*^9, 3.977324442659513*^9}, 
+   3.977458512508954*^9, {3.977458743759159*^9, 3.977458747754273*^9}, 
+   3.977920633233316*^9, 3.977931095253824*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"e188778b-3ca0-48ad-8dfc-80d837176bf5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "LiteRed2`"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"<<", "Mint`"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.953780399265491*^9, 3.953780411282276*^9}, 
+   3.955186220454481*^9, {3.955246071682187*^9, 3.9552460745622187`*^9}, 
+   3.955341826204887*^9, {3.955442610849704*^9, 3.955442614762361*^9}, {
+   3.957841997256398*^9, 3.957841997530644*^9}, 3.9773021598212643`*^9},
+ CellLabel->"In[2]:=",ExpressionUUID->"0d8e533f-fd8b-4c25-bce4-be988a3795b3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"**************** \"\>", "\[InvisibleSpace]", 
+   StyleBox["\<\"LiteRed v2.025\[Beta]\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FrontFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    BackFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    GraphicsColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FontWeight->Bold,
+    FontColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]], 
+   "\[InvisibleSpace]", "\<\" ********************\\nAuthor: Roman N. Lee, \
+Budker Institute of Nuclear Physics, Novosibirsk.\\nRelease Date: \
+????-??-??\\nTimestamp: Tue 1 Apr 2025 22:18:26\\nRead \
+from:/Users/cesarecarlomella/Software/LiteRed2/LiteRed2025.m \
+(CRC32:2902354241,{2340977437, 3317197336, 1063727846})\\n\\nLiteRed stands \
+for \"\>", "\[InvisibleSpace]", 
+   StyleBox["\<\"L\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FrontFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    BackFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    GraphicsColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FontColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]], "\[InvisibleSpace]", "\<\"oop \"\>", "\[InvisibleSpace]", 
+   StyleBox["\<\"i\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FrontFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    BackFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    GraphicsColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FontColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]], "\[InvisibleSpace]", "\<\"n\"\>", "\[InvisibleSpace]", 
+   StyleBox["\<\"te\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FrontFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    BackFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    GraphicsColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FontColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]], "\[InvisibleSpace]", "\<\"grals \"\>", "\[InvisibleSpace]", 
+   StyleBox["\<\"Red\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FrontFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    BackFaceColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    GraphicsColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]],
+    FontColor->RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]], 
+   "\[InvisibleSpace]", "\<\"uction.\\nThe package is designed for the search \
+and application of the Integration-By-Part reduction rules. It also contains \
+some other useful tools.\\n\\nSee ?LiteRed`* for a list of functions. \"\>"}],
+  
+  SequenceForm["**************** ", 
+   Style["LiteRed v2.025\[Beta]", {Bold, 
+     RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]}], 
+   " ********************\nAuthor: Roman N. Lee, Budker Institute of Nuclear \
+Physics, Novosibirsk.\nRelease Date: ????-??-??\nTimestamp: Tue 1 Apr 2025 \
+22:18:26\nRead from:/Users/cesarecarlomella/Software/LiteRed2/LiteRed2025.m \
+(CRC32:2902354241,{2340977437, 3317197336, 1063727846})\n\nLiteRed stands for \
+", 
+   Style["L", {
+     RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]}], "oop ", 
+   Style["i", {
+     RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]}], "n", 
+   Style["te", {
+     RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]}], "grals ", 
+   Style["Red", {
+     RGBColor[1, 
+      Rational[1, 3], 
+      Rational[1, 3]]}], 
+   "uction.\nThe package is designed for the search and application of the \
+Integration-By-Part reduction rules. It also contains some other useful \
+tools.\n\nSee ?LiteRed`* for a list of functions. "],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.955341827867408*^9, 3.9554193487838583`*^9, 3.9554210463762493`*^9, 
+   3.955428854566164*^9, 3.955440366735675*^9, 3.955442338831024*^9, 
+   3.955442617863444*^9, 3.955442648487136*^9, 3.955442800565865*^9, {
+   3.955444147263537*^9, 3.955444155649264*^9}, 3.9554445745067987`*^9, 
+   3.95544793932736*^9, 3.955503929780594*^9, 3.955504266465432*^9, {
+   3.955506121139605*^9, 3.955506133128057*^9}, 3.955506164559087*^9, 
+   3.9555998102008123`*^9, 3.955957219434231*^9, {3.956108809155382*^9, 
+   3.956108815898159*^9}, 3.956110713832877*^9, 3.956110897854599*^9, 
+   3.956125677517992*^9, 3.95615537725525*^9, 3.956190521980468*^9, 
+   3.956191829174049*^9, 3.9562097696938763`*^9, 3.956214073048578*^9, 
+   3.95627963743454*^9, 3.956306620285355*^9, 3.956308012186153*^9, 
+   3.956410690797398*^9, 3.956579728114046*^9, 3.956581582666187*^9, {
+   3.956631506555019*^9, 3.956631507316553*^9}, 3.9566817733074913`*^9, 
+   3.956682940528887*^9, 3.956694868979065*^9, 3.956734143665382*^9, 
+   3.956741545684934*^9, 3.956919725794133*^9, 3.95776401886466*^9, {
+   3.9578419978162737`*^9, 3.957841999266576*^9}, {3.9578421524516563`*^9, 
+   3.957842163271627*^9}, 3.957842758510277*^9, 3.957843038398824*^9, 
+   3.9578462062292337`*^9, 3.958378017359407*^9, 3.958394855430526*^9, 
+   3.958452846245163*^9, {3.958461361180441*^9, 3.9584613624204493`*^9}, {
+   3.958624439851286*^9, 3.958624446266295*^9}, 3.975574239476482*^9, 
+   3.9755746482216578`*^9, 3.975575485480073*^9, 3.975638110476841*^9, 
+   3.975638212516919*^9, 3.975638313964878*^9, 3.976253453143257*^9, 
+   3.9766857211390123`*^9, 3.976692339937326*^9, 3.9766980919656267`*^9, 
+   3.976710007593137*^9, 3.976711255405642*^9, 3.9767667630044327`*^9, 
+   3.976767260303484*^9, 3.976767330707004*^9, 3.976767883338615*^9, 
+   3.976767948206757*^9, 3.976772798658743*^9, 3.976858643822757*^9, 
+   3.9768618183366137`*^9, 3.9768734396702538`*^9, 3.976881380735009*^9, 
+   3.977294628913958*^9, {3.977302151132563*^9, 3.977302165247147*^9}, {
+   3.977302523850947*^9, 3.977302527318741*^9}, 3.977323544832326*^9, 
+   3.977323636248878*^9, {3.977324439335389*^9, 3.97732444324175*^9}, 
+   3.977458750736842*^9, 3.9779206386426163`*^9, 3.977931095816317*^9},
+ CellLabel->
+  "During evaluation of \
+In[2]:=",ExpressionUUID->"4e85b463-9718-42d1-bf44-1da0d46da3a4"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"convert", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<topo\>\"", "<>", 
+        RowBox[{"ToString", "[", "i", "]"}]}], "]"}], "->", " ", 
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<IF\>\"", "<>", 
+        RowBox[{"ToString", "[", "i", "]"}]}], "]"}]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "2"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"intfamvoc", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"ToExpression", "[", 
+      RowBox[{"\"\<IF\>\"", "<>", 
+       RowBox[{"ToString", "[", "i", "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "2"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.955419563933302*^9, 3.955419564055016*^9}, {
+  3.975574243998954*^9, 3.9755742454627743`*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"62cce165-c9ad-4c78-956a-faa82161379a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_4_015.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_4_071.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_5_199.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_5_103.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_5_079.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_6_455.dot\>\"", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.9779314915680513`*^9, 3.977931503232909*^9}, {
+  3.97793158088454*^9, 3.977931700673057*^9}},
+ CellLabel->"In[65]:=",ExpressionUUID->"617666f7-4d5e-4866-a5d3-9a88e23c81ec"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_6_221.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_6_215.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_6_207.dot\>\"", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.977931704017555*^9, 3.977931737683865*^9}},
+ CellLabel->
+  "In[104]:=",ExpressionUUID->"ca46f64b-aba1-42d4-a417-6e3a5396fd9e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_6_095.dot\>\"", "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{3.977931748413156*^9},
+ CellLabel->
+  "In[108]:=",ExpressionUUID->"883d256e-07eb-4205-912f-a046a6c74d98"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_7_475.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_7_463.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_7_223.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_8_479.dot\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Import", "[", "\"\<./graphs/topoA/all/topoA_8_255.dot\>\"", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.977931754959873*^9, 3.977931801456913*^9}, {
+  3.977931928914384*^9, 3.977931940711783*^9}},
+ CellLabel->
+  "In[137]:=",ExpressionUUID->"c69408d6-dab0-4035-98a1-a63f70fe7650"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9779317498822517`*^9, 
+  3.977931750251568*^9}},ExpressionUUID->"d6cca4a7-6bda-43eb-b0a4-\
+9ba286794f52"]
+},
+Evaluator->"kernel2",
+WindowSize->{1512, 853},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9603c9f8-73c1-4025-b914-485c62233cf7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 198, 3, 36, "Input",ExpressionUUID->"9c6142cc-d410-45dc-a959-19cb26e5df1e"],
+Cell[CellGroupData[{
+Cell[777, 27, 248, 4, 36, "Input",ExpressionUUID->"1533e6bd-f615-4d14-9c7c-48c88074d61f"],
+Cell[1028, 33, 1196, 17, 41, "Output",ExpressionUUID->"e188778b-3ca0-48ad-8dfc-80d837176bf5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2261, 55, 508, 9, 62, "Input",ExpressionUUID->"0d8e533f-fd8b-4c25-bce4-be988a3795b3"],
+Cell[2772, 66, 6505, 163, 240, "Print",ExpressionUUID->"4e85b463-9718-42d1-bf44-1da0d46da3a4"]
+}, Open  ]],
+Cell[9292, 232, 990, 25, 62, "Input",ExpressionUUID->"62cce165-c9ad-4c78-956a-faa82161379a"],
+Cell[10285, 259, 928, 21, 164, "Input",ExpressionUUID->"617666f7-4d5e-4866-a5d3-9a88e23c81ec"],
+Cell[11216, 282, 516, 12, 87, "Input",ExpressionUUID->"ca46f64b-aba1-42d4-a417-6e3a5396fd9e"],
+Cell[11735, 296, 246, 6, 36, "Input",ExpressionUUID->"883d256e-07eb-4205-912f-a046a6c74d98"],
+Cell[11984, 304, 809, 19, 138, "Input",ExpressionUUID->"c69408d6-dab0-4035-98a1-a63f70fe7650"],
+Cell[12796, 325, 154, 3, 36, "Input",ExpressionUUID->"d6cca4a7-6bda-43eb-b0a4-9ba286794f52"]
+}
+]
+*)
+

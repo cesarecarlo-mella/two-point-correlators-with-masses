@@ -1,0 +1,20 @@
+digraph topoB_4_228 {
+  label="topoB_4_228";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 2 [label="(p1,pp;1)"];
+    -2 -> 1 [label="(-p1,pp;2)"];
+    2 -> 1 [label="(k3,m2;5)"];
+    1 -> 2 [label="(k3-p1,m2;8)"];
+    3 -> 3 [label="(-k3+k1,m2;9)"];
+    4 -> 4 [label="(-k3+k2,m2;10)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+3 [shape=point];
+4 [shape=point];
+}
+

@@ -1,0 +1,19 @@
+digraph topoC_4_202 {
+  label="topoC_4_202";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 2 [label="(p1,pp;1)"];
+    -2 -> 1 [label="(-p1,pp;2)"];
+    2 -> 1 [label="(k2,m2;4)"];
+    1 -> 2 [label="(k1-p1,m2;6)"];
+    2 -> 1 [label="(k1-k2,m2;9)"];
+    3 -> 3 [label="(-p1+k2+k3,m2;10)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+3 [shape=point];
+}
+

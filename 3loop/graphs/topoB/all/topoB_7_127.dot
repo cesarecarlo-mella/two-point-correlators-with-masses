@@ -1,0 +1,24 @@
+digraph topoB_7_127 {
+  label="topoB_7_127";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 6 [label="(p1,pp;1)"];
+    -2 -> 2 [label="(-p1,pp;2)"];
+    1 -> 5 [label="(k1,m2;3)"];
+    6 -> 1 [label="(k2,m2;4)"];
+    5 -> 2 [label="(k3,m2;5)"];
+    4 -> 1 [label="(-p1+k1,m2;6)"];
+    1 -> 6 [label="(-p1+k2,m2;7)"];
+    2 -> 4 [label="(k3-p1,m2;8)"];
+    5 -> 4 [label="(-k3+k1,m2;9)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+4 [shape=point];
+5 [shape=point];
+6 [shape=point];
+}
+
