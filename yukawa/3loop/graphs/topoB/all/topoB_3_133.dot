@@ -1,0 +1,19 @@
+digraph topoB_3_133 {
+  label="topoB_3_133";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 1 [label="(p1,pp;1)"];
+    -2 -> 1 [label="(-p1,pp;2)"];
+    2 -> 2 [label="(k1,m2;3)"];
+    3 -> 3 [label="(k3,0;5)"];
+    4 -> 4 [label="(k2-k3,m2;10)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+3 [shape=point];
+4 [shape=point];
+}
+

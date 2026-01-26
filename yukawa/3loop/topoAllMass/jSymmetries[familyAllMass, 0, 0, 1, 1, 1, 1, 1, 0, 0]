@@ -1,0 +1,22 @@
+{{j[familyAllMass, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+    (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?NonPositive, (n9_)?NonPositive] :> 
+   Expand[j[familyAllMass, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+ {j[familyAllMass, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+    (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?NonPositive, (n9_)?NonPositive] :> 
+   Expand[j[familyAllMass, 0, 0, n3, n4, n5, n6, n7, 0, 0]/
+     ((2*j[familyAllMass, 0, 0, 0, 0, -1, 0, 0, 0, 0] + 
+        2*j[familyAllMass, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+        j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+        2*(m52 + m62)*j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+      (2*j[familyAllMass, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+        2*j[familyAllMass, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+        j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, -1, 0] + 2*(m42 + m62 - m82)*
+         j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8*
+      (-j[familyAllMass, -1, 0, 0, 0, 0, 0, 0, 0, 0] + 
+        2*j[familyAllMass, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*(m12 - m42 - pp)*j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n1*
+      (-j[familyAllMass, 0, -1, 0, 0, 0, 0, 0, 0, 0] + 
+        2*j[familyAllMass, 0, 0, 0, 0, -1, 0, 0, 0, 0] - 
+        2*(m22 - m52 - pp)*j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n2)]}}

@@ -1,0 +1,4 @@
+{j[famA, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+   (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+   (n8_)?Positive, (n9_)?NonPositive] :> 
+  Expand[j[famA, n2, n1, n3, n5, n4, n6, n7, n9, n8]]}

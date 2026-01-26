@@ -1,0 +1,20 @@
+digraph topoA_4_153 {
+  label="topoA_4_153";
+  rankdir="LR";
+  subgraph edges {
+    -1 -> 2 [label="(p1,pp;1)"];
+    -2 -> 1 [label="(-p1,pp;2)"];
+    2 -> 1 [label="(k1,m2;3)"];
+    1 -> 2 [label="(-p1+k1,m2;6)"];
+    3 -> 3 [label="(k2-p1,m2;7)"];
+    4 -> 4 [label="(-k3+k1,0;10)"];
+  }
+  subgraph incoming { rank="source"; -1; -2; }
+-2 [shape=point];
+-1 [shape=point];
+1 [shape=point];
+2 [shape=point];
+3 [shape=point];
+4 [shape=point];
+}
+

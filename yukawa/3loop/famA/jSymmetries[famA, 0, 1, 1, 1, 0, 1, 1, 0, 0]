@@ -1,0 +1,30 @@
+{{j[famA, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+    (n9_)?NonPositive] :> Expand[j[famA, n1, n2, n3, n4, n5, n6, n7, n8, 
+     n9]]}, {j[famA, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+    (n4_)?Positive, (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?NonPositive, (n9_)?NonPositive] :> 
+   Expand[j[famA, n5, n4, n3, n2, n1, n6, n7, 0, 0]/
+     ((j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 
+         0] + j[famA, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 
+         -1, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, -1, 0] + 
+        (4*m2 - pp)*j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+      (j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 
+         0] + j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 
+         -1, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+        (4*m2 - pp)*j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}, 
+ {j[famA, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+    (n9_)?NonPositive] :> Expand[j[famA, n5, n4, n6, n2, n1, n3, n7, n9, 
+     n8]]}, {j[famA, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+    (n4_)?Positive, (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?NonPositive, (n9_)?NonPositive] :> 
+   Expand[j[famA, n1, n2, n6, n4, n5, n3, n7, 0, 0]/
+     ((j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 
+         0] + j[famA, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 
+         -1, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, -1, 0] + 
+        (4*m2 - pp)*j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8*
+      (j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 
+         0] + j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 
+         -1, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+        (4*m2 - pp)*j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9)]}}

@@ -1,0 +1,1194 @@
+BasisDirectory[familyAllMass] = StringDrop[DirectoryName[$Input], -1]
+familyAllMass /: BasisSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "BasisSectors[familyAllMass]"}]]
+familyAllMass /: CurrentState[familyAllMass] := 
+  <|NewDsBasis -> True, GenerateIBP -> True, AnalyzeSectors -> True, 
+   FindSymmetries -> False|>
+familyAllMass /: CutDs[familyAllMass] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+familyAllMass /: Definitions[familyAllMass] := 
+  {Hold[MetricTensor[] === d, SetDim[d]], Hold[VecQ[k1], 
+    Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[k3], Declare[k3, Vector]], Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+familyAllMass /: Ds[familyAllMass] := {-m12 + sp[k1, k1], -m22 + sp[k2, k2], 
+   -m32 + sp[k3, k3], -m42 + pp + sp[k1, k1] - 2*sp[k1, p], 
+   -m52 + pp + sp[k2, k2] - 2*sp[k2, p], -m62 + pp + sp[k3, k3] - 
+    2*sp[k3, p], -m72 + sp[k1, k1] - 2*sp[k1, k2] + sp[k2, k2], 
+   -m82 + sp[k1, k1] - 2*sp[k1, k3] + sp[k3, k3], 
+   sp[k2, k2] - 2*sp[k2, k3] + sp[k3, k3]}
+familyAllMass /: DsBasisQ[familyAllMass] := True
+familyAllMass /: EMs[familyAllMass] := {p}
+familyAllMass /: ExtMappedSectors[familyAllMass] := {}
+familyAllMass /: ExtSectorsMappings[familyAllMass] := {}
+familyAllMass /: IBP[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], "IBP[familyAllMass]"}]]
+familyAllMass /: Information[familyAllMass] := 
+  (If[ValueQ[familyAllMass::usage], Information[familyAllMass, 
+     LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[
+         First /@ UpValues[familyAllMass] /. HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[familyAllMass, __]]] :> 
+           HoldForm[LiteRed`Private`f$[familyAllMass, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[
+              familyAllMass, ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  familyAllMass], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+familyAllMass /: jsOrder[familyAllMass] := {"np", "cp", "-ds", "-ns"}
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 0, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 0, 1, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 0, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 0, 1, 1, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 0, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 0, 1, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 0, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 0, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 0, 1, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 0, 1, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 0, 1, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 0, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 0, 1]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 1, 0]"}]]
+familyAllMass /: jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "jSymmetries[familyAllMass, 1, 1, 1, 1, 1, 1, 1, 1, 1]"}]]
+familyAllMass /: LI[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], "LI[familyAllMass]"}]]
+familyAllMass /: LMs[familyAllMass] := {k1, k2, k3}
+familyAllMass /: MappedSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "MappedSectors[familyAllMass]"}]]
+familyAllMass /: MIs[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], "MIs[familyAllMass]"}]]
+familyAllMass /: NDs[familyAllMass] := 9
+familyAllMass /: NonZeroSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "NonZeroSectors[familyAllMass]"}]]
+familyAllMass /: Parameters[familyAllMass] := {m12, m22, m32, m42, m52, m62, 
+   m72, m82, pp, d}
+familyAllMass /: PowerShifts[familyAllMass] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+familyAllMass /: SectorsMappings[familyAllMass] := {}
+familyAllMass /: SectorsPattern[familyAllMass] := {___}
+familyAllMass /: SimpleSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "SimpleSectors[familyAllMass]"}]]
+familyAllMass /: SPs[familyAllMass] := {sp[k1, k1], sp[k1, k2], sp[k1, k3], 
+   sp[k1, p], sp[k2, k2], sp[k2, k3], sp[k2, p], sp[k3, k3], sp[k3, p]}
+familyAllMass /: SR[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], "SR[familyAllMass]"}]]
+familyAllMass /: Toj[familyAllMass] := 
+  {sp[k1, k1] -> m12 + j[familyAllMass, -1, 0, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k1, k2] -> (m12 + m22 - m72 + j[familyAllMass, -1, 0, 0, 0, 0, 0, 0, 0, 
+       0] + j[familyAllMass, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+      j[familyAllMass, 0, 0, 0, 0, 0, 0, -1, 0, 0])/2, 
+   sp[k1, k3] -> (m12 + m32 - m82 + j[familyAllMass, -1, 0, 0, 0, 0, 0, 0, 0, 
+       0] + j[familyAllMass, 0, 0, -1, 0, 0, 0, 0, 0, 0] - 
+      j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, -1, 0])/2, 
+   sp[k1, p] -> (m12 - m42 + pp + j[familyAllMass, -1, 0, 0, 0, 0, 0, 0, 0, 
+       0] - j[familyAllMass, 0, 0, 0, -1, 0, 0, 0, 0, 0])/2, 
+   sp[k2, k2] -> m22 + j[familyAllMass, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k2, k3] -> (m22 + m32 + j[familyAllMass, 0, -1, 0, 0, 0, 0, 0, 0, 0] + 
+      j[familyAllMass, 0, 0, -1, 0, 0, 0, 0, 0, 0] - 
+      j[familyAllMass, 0, 0, 0, 0, 0, 0, 0, 0, -1])/2, 
+   sp[k2, p] -> (m22 - m52 + pp + j[familyAllMass, 0, -1, 0, 0, 0, 0, 0, 0, 
+       0] - j[familyAllMass, 0, 0, 0, 0, -1, 0, 0, 0, 0])/2, 
+   sp[k3, k3] -> m32 + j[familyAllMass, 0, 0, -1, 0, 0, 0, 0, 0, 0], 
+   sp[k3, p] -> (m32 - m62 + pp + j[familyAllMass, 0, 0, -1, 0, 0, 0, 0, 0, 
+       0] - j[familyAllMass, 0, 0, 0, 0, 0, -1, 0, 0, 0])/2}
+familyAllMass /: UniqueSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "UniqueSectors[familyAllMass]"}]]
+familyAllMass /: ZerojRule[familyAllMass] := 
+  LiteRed`Private`jjj:j[familyAllMass, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{0, 0, 0, 0, 0, 0, 1, 1, 1}, {1, 1, 0, 1, 1, 0, 1, 0, 1}, 
+        {1, 0, 1, 1, 0, 1, 0, 1, 1}, {0, 0, 1, 0, 0, 1, 1, 0, 1}, 
+        {0, 1, 0, 0, 1, 0, 0, 1, 1}, {0, 1, 1, 0, 1, 1, 0, 0, 1}}]
+familyAllMass /: ZeroSectors[familyAllMass] := 
+  Get[FileNameJoin[{BasisDirectory[familyAllMass], 
+     "ZeroSectors[familyAllMass]"}]]
+familyAllMass /: SectorsMappings[familyAllMass, 
+   LiteRed`Private`ns$:(0 | 1)..] := Cases[SectorsMappings[familyAllMass], 
+   HoldPattern[js[familyAllMass, LiteRed`Private`ns$] -> _]]
+familyAllMass::usage = "3-loop basis with 1 external momenta.\nUse \
+Information[familyAllMass] to get basis summary.\nThis string can be \
+redefined by setting familyAllMass::usage=\"\[Ellipsis]\""; 
+ Information[familyAllMass, LongForm -> False]; 
+LiteRed`Private`CheckDefs[familyAllMass]
+BasisDirectory[familyAllMass]
