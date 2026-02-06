@@ -1,0 +1,3 @@
+{j[topoB, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+   (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+   (n9_)?NonPositive] :> Expand[j[topoB, n2, n1, n3, n5, n4, n6, n8, n7, n9]]}

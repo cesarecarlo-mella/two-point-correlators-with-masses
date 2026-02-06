@@ -1,0 +1,1217 @@
+BasisDirectory[famA] = StringDrop[DirectoryName[$Input], -1]
+famA /: BasisSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "BasisSectors[famA]"}]]
+famA /: CurrentState[famA] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+famA /: CutDs[famA] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+famA /: Definitions[famA] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[k3], Declare[k3, Vector]], Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+famA /: Ds[famA] := {-m2 + sp[k1, k1], -m2 + sp[k2, k2], -m2 + sp[k3, k3], 
+   -m2 + pp + sp[k1, k1] - 2*sp[k1, p], -m2 + pp + sp[k2, k2] - 2*sp[k2, p], 
+   -m2 + pp + sp[k3, k3] - 2*sp[k3, p], sp[k1, k1] - 2*sp[k1, k2] + 
+    sp[k2, k2], sp[k1, k1] - 2*sp[k1, k3] + sp[k3, k3], 
+   sp[k2, k2] - 2*sp[k2, k3] + sp[k3, k3]}
+famA /: DsBasisQ[famA] := True
+famA /: EMs[famA] := {p}
+famA /: ExtMappedSectors[famA] := {}
+famA /: ExtSectorsMappings[famA] := {}
+famA /: IBP[famA] := Get[FileNameJoin[{BasisDirectory[famA], "IBP[famA]"}]]
+famA /: Information[famA] := (If[ValueQ[famA::usage], 
+    Information[famA, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[famA] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[famA, __]]] :> 
+           HoldForm[LiteRed`Private`f$[famA, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[famA, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  famA], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+famA /: jRules[famA, 0, 0, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 0, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 0, 1, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 0, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 0, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 0, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 0, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 0, 1, 1, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 0, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 0, 1, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 0, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 0, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 0, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 1, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jRules[famA, 1, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jRules[famA, 1, 1, 1, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jsOrder[famA] := {"np", "cp", "-ds", "-ns"}
+famA /: jSymmetries[famA, 0, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 0, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 0, 1, 0, 1, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 0, 1, 0, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 0, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 0, 1, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 0, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 0, 0]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 0, 1, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 0, 1, 1, 1, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 0, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 0, 1, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 0, 0]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 0, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 1, 1, 0]"}]]
+famA /: jSymmetries[famA, 0, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 0, 1, 1, 1, 1, 1, 1, 1, 1]"}]]
+famA /: jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 0, 0]"}]]
+famA /: jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 0, 1]"}]]
+famA /: jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 1, 1, 1, 1, 1, 1, 0, 1, 1]"}]]
+famA /: jSymmetries[famA, 1, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[famA], 
+     "jSymmetries[famA, 1, 1, 1, 1, 1, 1, 1, 1, 1]"}]]
+famA /: LI[famA] := Get[FileNameJoin[{BasisDirectory[famA], "LI[famA]"}]]
+famA /: LMs[famA] := {k1, k2, k3}
+famA /: MappedSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "MappedSectors[famA]"}]]
+famA /: MIs[famA] := Get[FileNameJoin[{BasisDirectory[famA], "MIs[famA]"}]]
+famA /: NDs[famA] := 9
+famA /: NonZeroSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "NonZeroSectors[famA]"}]]
+famA /: Parameters[famA] := {m2, pp, d}
+famA /: PowerShifts[famA] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+famA /: SectorsMappings[famA] := {js[famA, 1, 1, 1, 1, 1, 1, 1, 0, 1] -> 
+    js[famA, 1, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 1, 1, 1, 1, 1, 1, 1, 0] -> js[famA, 1, 1, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 0, 1, 1, 1, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 
+     1, 1], js[famA, 1, 1, 0, 1, 1, 1, 1, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 1], 
+   js[famA, 1, 1, 1, 0, 1, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 
+     1], js[famA, 1, 1, 1, 1, 0, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 
+     1, 1], js[famA, 1, 1, 1, 1, 1, 0, 1, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 1], 
+   js[famA, 1, 1, 1, 1, 1, 1, 0, 1, 0] -> js[famA, 1, 1, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 1, 1, 1, 1, 1, 0, 0] -> js[famA, 1, 1, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 0, 1, 1, 1, 1, 1, 0, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 0], 
+   js[famA, 1, 1, 0, 1, 1, 1, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 
+     0], js[famA, 1, 1, 1, 0, 1, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 
+     1, 0], js[famA, 1, 1, 1, 1, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 0], 
+   js[famA, 1, 1, 1, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 1, 1, 
+     0], js[famA, 0, 1, 1, 1, 1, 1, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 0, 1, 1, 1, 1, 0, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 0, 1, 1, 1, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 1, 0, 1, 1, 1, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 1, 0, 1, 1, 1, 1, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 1, 1, 0, 1, 1, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 1, 1, 0, 1, 1, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 1, 1, 1, 0, 1, 0, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 1, 1, 1, 0, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 1, 1, 1, 1, 0, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 1, 1, 1, 1, 0, 1, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 0, 1, 1, 1, 1, 0, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 1, 
+     1], js[famA, 1, 0, 1, 0, 1, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     1, 1], js[famA, 1, 0, 1, 1, 1, 0, 1, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 1, 1], 
+   js[famA, 1, 1, 0, 0, 1, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 1, 
+     1], js[famA, 1, 1, 0, 1, 0, 1, 1, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     1, 1], js[famA, 1, 0, 1, 1, 0, 1, 1, 1, 1] -> 
+    js[famA, 0, 1, 1, 0, 1, 1, 1, 1, 1], 
+   js[famA, 1, 1, 0, 1, 1, 0, 1, 1, 1] -> js[famA, 0, 1, 1, 0, 1, 1, 1, 1, 
+     1], js[famA, 0, 1, 0, 1, 1, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     1, 1], js[famA, 1, 0, 0, 1, 1, 1, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 1, 1], 
+   js[famA, 1, 1, 1, 0, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 1, 
+     1], js[famA, 1, 1, 1, 0, 1, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     1, 1], js[famA, 1, 1, 1, 1, 0, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 1, 1], 
+   js[famA, 0, 1, 1, 1, 1, 1, 1, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     0], js[famA, 1, 0, 1, 1, 1, 1, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 0], js[famA, 1, 0, 1, 1, 1, 1, 1, 0, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 0], 
+   js[famA, 1, 1, 0, 1, 1, 1, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     0], js[famA, 1, 1, 0, 1, 1, 1, 0, 1, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 0], js[famA, 1, 1, 1, 0, 1, 1, 0, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 0], 
+   js[famA, 1, 1, 1, 0, 1, 1, 1, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     0], js[famA, 1, 1, 1, 1, 0, 1, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 0], js[famA, 1, 1, 1, 1, 0, 1, 1, 0, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 0], 
+   js[famA, 1, 1, 1, 1, 1, 0, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 1, 
+     0], js[famA, 1, 1, 1, 1, 1, 0, 0, 1, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     1, 0], js[famA, 1, 0, 1, 1, 1, 1, 0, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 0, 1, 1, 1, 1, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 1, 0, 1, 1, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 1, 1, 0, 1, 0, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 1, 1, 1, 0, 1, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 0, 1, 1, 1, 0, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 1], js[famA, 0, 1, 1, 1, 1, 0, 0, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1], 
+   js[famA, 0, 1, 1, 1, 1, 0, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 
+     1], js[famA, 1, 0, 1, 0, 1, 1, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 1], js[famA, 1, 0, 1, 0, 1, 1, 1, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1], 
+   js[famA, 1, 0, 1, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 
+     1], js[famA, 1, 0, 1, 1, 1, 0, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 1], js[famA, 1, 1, 0, 0, 1, 1, 0, 1, 1] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1], 
+   js[famA, 1, 1, 0, 0, 1, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 
+     1], js[famA, 1, 1, 0, 1, 0, 1, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 1], js[famA, 1, 1, 0, 1, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 1], 
+   js[famA, 0, 1, 1, 1, 1, 0, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 0, 1, 
+     1], js[famA, 1, 0, 1, 0, 1, 1, 0, 1, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 0, 
+     1, 1], js[famA, 1, 0, 1, 1, 1, 0, 1, 1, 0] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 0, 1, 1], 
+   js[famA, 1, 1, 0, 0, 1, 1, 1, 0, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 0, 1, 
+     1], js[famA, 1, 1, 0, 1, 0, 1, 1, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 0, 
+     1, 1], js[famA, 1, 0, 1, 1, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 1, 1, 0, 1, 1, 1, 1, 0], 
+   js[famA, 1, 1, 0, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 1, 1, 0, 1, 1, 1, 1, 
+     0], js[famA, 0, 0, 1, 1, 1, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     0, 1], js[famA, 0, 1, 0, 1, 1, 1, 0, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[famA, 0, 1, 0, 1, 1, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 
+     1], js[famA, 1, 0, 0, 1, 1, 1, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     0, 1], js[famA, 1, 0, 0, 1, 1, 1, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[famA, 1, 1, 1, 0, 0, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 
+     1], js[famA, 1, 1, 1, 0, 0, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     0, 1], js[famA, 1, 1, 1, 0, 1, 0, 0, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[famA, 1, 1, 1, 0, 1, 0, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 
+     1], js[famA, 1, 1, 1, 1, 0, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     0, 1], js[famA, 1, 1, 1, 1, 0, 0, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[famA, 0, 1, 0, 1, 1, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 0, 0, 1, 1, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 1, 1, 0, 0, 1, 0, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 1, 1, 0, 1, 0, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 1, 1, 1, 0, 0, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     1, 1], js[famA, 0, 1, 0, 1, 0, 1, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 1, 1, 1], 
+   js[famA, 0, 1, 1, 1, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 1, 
+     1], js[famA, 1, 0, 0, 0, 1, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 
+     1, 1], js[famA, 1, 0, 1, 0, 1, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 1, 1, 1], 
+   js[famA, 1, 1, 0, 0, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 1, 
+     1], js[famA, 0, 0, 1, 1, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 1], js[famA, 0, 1, 0, 0, 1, 1, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[famA, 0, 1, 0, 1, 1, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     1], js[famA, 0, 1, 1, 0, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 1], js[famA, 0, 1, 1, 0, 1, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[famA, 1, 0, 0, 1, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     1], js[famA, 1, 0, 0, 1, 1, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 1], js[famA, 1, 0, 1, 0, 0, 1, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[famA, 1, 0, 1, 1, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     1], js[famA, 1, 1, 0, 0, 1, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 1], js[famA, 1, 1, 0, 1, 0, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[famA, 1, 1, 1, 0, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 0, 1, 1, 1, 1, 1, 
+     1], js[famA, 1, 0, 1, 1, 1, 1, 0, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 1, 1, 0, 1, 1, 1, 0, 0, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 0], 
+   js[famA, 1, 1, 1, 0, 1, 1, 0, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 1, 1, 1, 0, 1, 0, 0, 0] -> js[famA, 0, 1, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 1, 1, 1, 1, 1, 0, 0, 0, 0] -> 
+    js[famA, 0, 1, 1, 1, 1, 1, 0, 0, 0], 
+   js[famA, 0, 1, 1, 1, 1, 0, 0, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 
+     0], js[famA, 1, 0, 1, 0, 1, 1, 1, 0, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 0], js[famA, 1, 0, 1, 1, 1, 0, 0, 0, 1] -> 
+    js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 0], 
+   js[famA, 1, 1, 0, 0, 1, 1, 0, 1, 0] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 0, 
+     0], js[famA, 1, 1, 0, 1, 0, 1, 0, 0, 1] -> js[famA, 0, 1, 1, 1, 0, 1, 1, 
+     0, 0], js[famA, 0, 1, 0, 1, 1, 1, 0, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 0], 
+   js[famA, 1, 0, 0, 1, 1, 1, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 
+     0], js[famA, 1, 1, 1, 0, 0, 1, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 
+     0, 0], js[famA, 1, 1, 1, 0, 1, 0, 0, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 0], 
+   js[famA, 1, 1, 1, 1, 0, 0, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 1, 0, 
+     0], js[famA, 0, 0, 1, 1, 1, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 0, 1, 0, 1, 1, 1, 0, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 1, 0, 1, 1, 1, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 0, 0, 1, 1, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 0, 0, 1, 1, 1, 1, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 1, 0, 0, 1, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 1, 0, 0, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 1, 0, 1, 0, 0, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 1, 0, 1, 0, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 1, 1, 0, 0, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 1, 1, 0, 0, 1, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 1, 1, 1, 0, 1, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 0, 1, 1, 1, 0, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 0, 1, 1, 1, 1, 0, 0, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 1, 1, 1, 1, 0, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 0, 1, 0, 1, 1, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 0, 1, 0, 1, 1, 0, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 0, 1, 1, 1, 0, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 0, 1, 1, 1, 0, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 0, 0, 1, 1, 0, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 0, 0, 1, 1, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 0, 1, 0, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 0, 1, 0, 1, 1, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 0, 1, 1, 1, 0, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 
+     1], js[famA, 0, 1, 0, 1, 0, 1, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 
+     0, 1], js[famA, 0, 1, 0, 1, 0, 1, 1, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 1], 
+   js[famA, 0, 1, 1, 1, 0, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 
+     1], js[famA, 0, 1, 1, 1, 0, 0, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 
+     0, 1], js[famA, 1, 0, 0, 0, 1, 1, 0, 1, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 1], 
+   js[famA, 1, 0, 0, 0, 1, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 
+     1], js[famA, 1, 0, 1, 0, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 
+     0, 1], js[famA, 1, 0, 1, 0, 1, 0, 1, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 1], 
+   js[famA, 1, 1, 0, 0, 0, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 
+     1], js[famA, 1, 1, 0, 0, 0, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 1, 
+     0, 1], js[famA, 0, 1, 0, 1, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[famA, 0, 1, 1, 1, 0, 0, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 1, 
+     1], js[famA, 1, 0, 0, 0, 1, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 
+     1, 1], js[famA, 1, 0, 1, 0, 1, 0, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[famA, 1, 1, 0, 0, 0, 1, 0, 1, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 1, 
+     1], js[famA, 0, 0, 1, 1, 0, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 0], js[famA, 0, 1, 0, 0, 1, 1, 1, 1, 0] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0], 
+   js[famA, 0, 1, 0, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     0], js[famA, 0, 1, 1, 0, 0, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 0], js[famA, 0, 1, 1, 0, 1, 0, 1, 1, 0] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0], 
+   js[famA, 1, 0, 0, 1, 0, 1, 1, 0, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     0], js[famA, 1, 0, 0, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 0], js[famA, 1, 0, 1, 0, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0], 
+   js[famA, 1, 0, 1, 1, 0, 0, 1, 0, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 
+     0], js[famA, 1, 1, 0, 0, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 1, 1, 
+     1, 0], js[famA, 1, 1, 0, 1, 0, 0, 0, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 1, 1, 1, 0], 
+   js[famA, 0, 0, 1, 1, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 
+     1], js[famA, 0, 1, 0, 0, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 
+     1, 1], js[famA, 0, 1, 0, 1, 0, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 1], 
+   js[famA, 1, 0, 0, 0, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 
+     1], js[famA, 1, 0, 0, 0, 1, 0, 1, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 
+     1, 1], js[famA, 0, 0, 0, 1, 1, 1, 1, 0, 1] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 1, 1], 
+   js[famA, 0, 0, 0, 1, 1, 1, 1, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 1, 
+     1], js[famA, 1, 1, 1, 0, 0, 0, 0, 1, 1] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     1, 1], js[famA, 1, 1, 1, 0, 0, 0, 1, 0, 1] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 1, 1], 
+   js[famA, 1, 1, 1, 0, 0, 0, 1, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 1, 
+     1], js[famA, 0, 0, 0, 1, 0, 1, 1, 1, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 
+     1, 1], js[famA, 0, 0, 0, 1, 1, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 1], 
+   js[famA, 0, 1, 1, 0, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 
+     1], js[famA, 1, 0, 1, 0, 0, 0, 1, 1, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 
+     1, 1], js[famA, 1, 1, 0, 0, 0, 0, 1, 1, 1] -> 
+    js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 1], 
+   js[famA, 0, 1, 0, 1, 1, 1, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 0, 0, 1, 1, 1, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 1, 1, 1, 0, 0, 1, 0, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 0], 
+   js[famA, 1, 1, 1, 0, 1, 0, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 1, 1, 1, 0, 0, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 0, 1, 1, 1, 0, 1, 0, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 0], 
+   js[famA, 0, 1, 1, 1, 1, 0, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 0, 1, 0, 1, 1, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 1, 0, 1, 1, 1, 0, 0, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 0], 
+   js[famA, 1, 1, 0, 0, 1, 1, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 1, 0, 1, 0, 1, 0, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 1, 0, 
+     0, 0], js[famA, 0, 0, 1, 1, 1, 0, 0, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1], 
+   js[famA, 0, 1, 0, 1, 0, 1, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 
+     1], js[famA, 0, 1, 0, 1, 0, 1, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 
+     0, 1], js[famA, 0, 1, 1, 1, 0, 0, 0, 1, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1], 
+   js[famA, 0, 1, 1, 1, 0, 0, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 
+     1], js[famA, 1, 0, 0, 0, 1, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 
+     0, 1], js[famA, 1, 0, 0, 0, 1, 1, 1, 0, 0] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1], 
+   js[famA, 1, 0, 1, 0, 1, 0, 0, 0, 1] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 
+     1], js[famA, 1, 0, 1, 0, 1, 0, 1, 0, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 
+     0, 1], js[famA, 1, 1, 0, 0, 0, 1, 0, 0, 1] -> 
+    js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 1], 
+   js[famA, 1, 1, 0, 0, 0, 1, 0, 1, 0] -> js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 
+     1], js[famA, 0, 0, 0, 1, 1, 1, 0, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 1], js[famA, 0, 0, 0, 1, 1, 1, 1, 0, 0] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 1, 1, 0, 0, 0, 0, 0, 1] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 1, 1, 0, 0, 0, 0, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 1, 0, 0, 0, 1, 0, 0] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 0, 1, 1, 1, 0, 1, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 
+     1], js[famA, 0, 1, 0, 1, 0, 1, 0, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 1], js[famA, 0, 1, 1, 1, 0, 0, 0, 0, 1] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1], 
+   js[famA, 1, 0, 0, 0, 1, 1, 0, 0, 1] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 
+     1], js[famA, 1, 0, 1, 0, 1, 0, 0, 1, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 1], js[famA, 1, 1, 0, 0, 0, 1, 1, 0, 0] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 1], 
+   js[famA, 0, 0, 0, 1, 0, 1, 1, 0, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 
+     0], js[famA, 0, 0, 0, 1, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 
+     1, 0], js[famA, 0, 1, 1, 0, 0, 0, 1, 1, 0] -> 
+    js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 0], 
+   js[famA, 1, 0, 1, 0, 0, 0, 1, 0, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 1, 
+     0], js[famA, 1, 1, 0, 0, 0, 0, 0, 1, 1] -> js[famA, 0, 0, 0, 0, 1, 1, 1, 
+     1, 0], js[famA, 0, 0, 1, 1, 0, 0, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[famA, 0, 1, 0, 0, 0, 1, 1, 1, 0] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 
+     0], js[famA, 0, 1, 0, 1, 0, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 
+     1, 0], js[famA, 1, 0, 0, 0, 0, 1, 1, 0, 1] -> 
+    js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[famA, 1, 0, 0, 0, 1, 0, 0, 1, 1] -> js[famA, 0, 0, 1, 0, 1, 0, 1, 1, 
+     0], js[famA, 1, 1, 1, 0, 0, 0, 0, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 0], js[famA, 0, 0, 1, 1, 1, 0, 0, 0, 0] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 0], 
+   js[famA, 0, 1, 0, 1, 0, 1, 0, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 
+     0], js[famA, 0, 1, 1, 1, 0, 0, 0, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 0], js[famA, 1, 0, 0, 0, 1, 1, 0, 0, 0] -> 
+    js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 0], 
+   js[famA, 1, 0, 1, 0, 1, 0, 0, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 0, 
+     0], js[famA, 1, 1, 0, 0, 0, 1, 0, 0, 0] -> js[famA, 0, 0, 0, 1, 1, 1, 0, 
+     0, 0]}
+famA /: SectorsPattern[famA] := {___}
+famA /: SimpleSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "SimpleSectors[famA]"}]]
+famA /: SPs[famA] := {sp[k1, k1], sp[k1, k2], sp[k1, k3], sp[k1, p], 
+   sp[k2, k2], sp[k2, k3], sp[k2, p], sp[k3, k3], sp[k3, p]}
+famA /: SR[famA] := Get[FileNameJoin[{BasisDirectory[famA], "SR[famA]"}]]
+famA /: Toj[famA] := {sp[k1, k1] -> m2 + j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k1, k2] -> (2*m2 + j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, -1, 0, 
+       0])/2, sp[k1, k3] -> (2*m2 + j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, -1, 
+       0])/2, sp[k1, p] -> (pp + j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] - 
+      j[famA, 0, 0, 0, -1, 0, 0, 0, 0, 0])/2, 
+   sp[k2, k2] -> m2 + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k2, k3] -> (2*m2 + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0] + 
+      j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 
+       -1])/2, sp[k2, p] -> (pp + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+      j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0])/2, 
+   sp[k3, k3] -> m2 + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0], 
+   sp[k3, p] -> (pp + j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - 
+      j[famA, 0, 0, 0, 0, 0, -1, 0, 0, 0])/2}
+famA /: UniqueSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "UniqueSectors[famA]"}]]
+famA /: ZerojRule[famA] := LiteRed`Private`jjj:j[famA, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 1, 0, 1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0, 1, 0, 1}, 
+        {0, 0, 1, 0, 0, 1, 1, 1, 1}, {1, 0, 1, 1, 0, 1, 1, 1, 0}, 
+        {1, 0, 1, 1, 0, 1, 0, 1, 1}, {0, 1, 0, 0, 1, 0, 1, 1, 1}, 
+        {1, 0, 0, 1, 0, 0, 1, 1, 1}, {0, 1, 1, 0, 1, 1, 0, 1, 1}, 
+        {0, 1, 1, 0, 1, 1, 1, 0, 1}}]
+famA /: ZeroSectors[famA] := 
+  Get[FileNameJoin[{BasisDirectory[famA], "ZeroSectors[famA]"}]]
+famA /: SectorsMappings[famA, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[famA], HoldPattern[js[famA, LiteRed`Private`ns$] -> 
+     _]]
+famA::usage = "3-loop basis with 1 external momenta.\nUse Information[famA] \
+to get basis summary.\nThis string can be redefined by setting \
+famA::usage=\"\[Ellipsis]\""; Information[famA, LongForm -> False]; 
+LiteRed`Private`CheckDefs[famA]
+BasisDirectory[famA]

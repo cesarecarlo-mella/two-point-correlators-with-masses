@@ -1,0 +1,13 @@
+{{j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[topoB, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+ {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[topoB, n1, n2, 0, n4, n5, n9, n8, n7, n6]/
+     (j[topoB, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0, 0, 0, 
+        0, 0] - j[topoB, 0, 0, -1, 0, 0, 0, 0, 0, 0] - 
+       j[topoB, 0, 0, 0, -1, 0, 0, 0, 0, 0] - j[topoB, 0, 0, 0, 0, -1, 0, 0, 
+        0, 0] + j[topoB, 0, 0, 0, 0, 0, -1, 0, 0, 0] + 
+       j[topoB, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n3]}}

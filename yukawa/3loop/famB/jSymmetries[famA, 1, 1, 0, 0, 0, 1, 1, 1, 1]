@@ -1,0 +1,25 @@
+{{j[famA, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+    (n4_)?NonPositive, (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[famA, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+ {j[famA, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+    (n4_)?NonPositive, (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[famA, n2, n1, 0, n5, n4, n9, n7, n8, n6]/
+     (j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 
+        0] - j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, -1, 0, 0, 
+        0, 0, 0] - j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0] + 
+       j[famA, 0, 0, 0, 0, 0, -1, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 
+        -1])^n3]}, {j[famA, (n1_)?Positive, (n2_)?Positive, 
+    (n3_)?NonPositive, (n4_)?NonPositive, (n5_)?NonPositive, (n6_)?Positive, 
+    (n7_)?Positive, (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[famA, n2, n1, n3, n5, n4, n6, n8, n7, n9]]}, 
+ {j[famA, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+    (n4_)?NonPositive, (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, 
+    (n8_)?Positive, (n9_)?Positive] :> 
+   Expand[j[famA, n1, n2, 0, n4, n5, n9, n8, n7, n6]/
+     (j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 
+        0] - j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, -1, 0, 0, 
+        0, 0, 0] - j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0] + 
+       j[famA, 0, 0, 0, 0, 0, -1, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 
+        -1])^n3]}}

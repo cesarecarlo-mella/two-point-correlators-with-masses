@@ -1,0 +1,8 @@
+{j[famA, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+   (n5_)?NonPositive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+   (n9_)?NonPositive] :> Expand[j[famA, n5, n4, n6, n2, n1, n3, n8, n7, 0]/
+    (j[famA, -1, 0, 0, 0, 0, 0, 0, 0, 0] + j[famA, 0, -1, 0, 0, 0, 0, 0, 0, 
+       0] - j[famA, 0, 0, -1, 0, 0, 0, 0, 0, 0] - j[famA, 0, 0, 0, -1, 0, 0, 
+       0, 0, 0] - j[famA, 0, 0, 0, 0, -1, 0, 0, 0, 0] + 
+      j[famA, 0, 0, 0, 0, 0, -1, 0, 0, 0] + j[famA, 0, 0, 0, 0, 0, 0, 0, 0, 
+       -1])^n9]}
