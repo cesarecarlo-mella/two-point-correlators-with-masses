@@ -1,0 +1,12 @@
+repeat;
+id Sector(topoA)*Prop(k1,m2) = Sector(topoA)/DD1;
+id Sector(topoA)*Prop(k2,m2) = Sector(topoA)/DD2;
+id Sector(topoA)*Prop(k1 - k2,m2) = Sector(topoA)/DD3;
+id Sector(topoA)*Prop(k1 - p1,m2) = Sector(topoA)/DD4;
+id Sector(topoA)*Prop(k2 - p1,0) = Sector(topoA)/DD5;
+id Sector(topoB)*Prop(k1,m2) = Sector(topoB)/DD6;
+id Sector(topoB)*Prop(k2,m2) = Sector(topoB)/DD7;
+id Sector(topoB)*Prop(k1 - k2,0) = Sector(topoB)/DD8;
+id Sector(topoB)*Prop(k1 - p1,m2) = Sector(topoB)/DD9;
+id Sector(topoB)*Prop(k2 - p1,m2) = Sector(topoB)/DD10;
+endrepeat;

@@ -1,0 +1,9 @@
+id k1.k1 * Sector(topoB) = +1*Den(1)*Sector(topoB)*DD10+Num(m2)*Den(1)*Sector(topoB)*1;
+id k1.k2 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD10+1*Den(2)*Sector(topoB)*DD11+(-1)*Den(2)*Sector(topoB)*DD13+(-1)*Den(2)*Sector(topoB)*DD14+1*Den(2)*Sector(topoB)*DD15+(-1)*Den(2)*Sector(topoB)*DD16+(-1)*Den(2)*Sector(topoB)*DD17+1*Den(2)*Sector(topoB)*DD18+Num(-m2)*Den(1)*Sector(topoB)*1;
+id k1.k3 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD10+1*Den(2)*Sector(topoB)*DD12+(-1)*Den(2)*Sector(topoB)*DD16;
+id k1.p1 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD10+(-1)*Den(2)*Sector(topoB)*DD13+Num(pp)*Den(2)*Sector(topoB)*1;
+id k2.k2 * Sector(topoB) = +1*Den(1)*Sector(topoB)*DD11+Num(m2)*Den(1)*Sector(topoB)*1;
+id k2.k3 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD11+1*Den(2)*Sector(topoB)*DD12+(-1)*Den(2)*Sector(topoB)*DD17;
+id k2.p1 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD11+(-1)*Den(2)*Sector(topoB)*DD14+Num(pp)*Den(2)*Sector(topoB)*1;
+id k3.k3 * Sector(topoB) = +1*Den(1)*Sector(topoB)*DD12;
+id k3.p1 * Sector(topoB) = +1*Den(2)*Sector(topoB)*DD12+(-1)*Den(2)*Sector(topoB)*DD15+Num(pp)*Den(2)*Sector(topoB)*1;
