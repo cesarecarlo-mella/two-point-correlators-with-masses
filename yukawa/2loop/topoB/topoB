@@ -1,0 +1,395 @@
+BasisDirectory[topoB] = StringDrop[DirectoryName[$Input], -1]
+topoB /: BasisSectors[topoB] := {js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 0, 1, 0, 1, 0], js[topoB, 1, 0, 0, 0, 1], 
+   js[topoB, 1, 1, 0, 0, 0], js[topoB, 0, 0, 1, 1, 1], 
+   js[topoB, 0, 1, 1, 1, 0], js[topoB, 1, 0, 1, 0, 1], 
+   js[topoB, 1, 1, 1, 0, 0]}
+topoB /: CurrentState[topoB] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+topoB /: CutDs[topoB] := {0, 0, 0, 0, 0}
+topoB /: Definitions[topoB] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+topoB /: Ds[topoB] := {-m2 + sp[k1, k1], -m2 + sp[k2, k2], 
+   sp[k1, k1] - 2*sp[k1, k2] + sp[k2, k2], -m2 + pp + sp[k1, k1] - 
+    2*sp[k1, p], -m2 + pp + sp[k2, k2] - 2*sp[k2, p]}
+topoB /: DsBasisQ[topoB] := True
+topoB /: EMs[topoB] := {p}
+topoB /: ExtMappedSectors[topoB] := {}
+topoB /: ExtSectorsMappings[topoB] := {}
+topoB /: IBP[topoB] := {-(#4*j[topoB, -1 + #1, #2, #3, 1 + #4, #5]) - 
+     #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] + 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + (d - 2*#1 - #3 - #4)*
+      j[topoB, #1, #2, #3, #4, #5] - #4*(2*m2 - pp)*j[topoB, #1, #2, #3, 
+       1 + #4, #5] - 2*m2*#1*j[topoB, 1 + #1, #2, #3, #4, #5], 
+    #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] - 
+     #2*j[topoB, -1 + #1, 1 + #2, #3, #4, #5] - 
+     #5*j[topoB, #1, -1 + #2, #3, #4, 1 + #5] - 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + 
+     #5*j[topoB, #1, #2, -1 + #3, #4, 1 + #5] - 
+     #5*j[topoB, #1, #2, #3, -1 + #4, 1 + #5] + 
+     (-#2 + #3)*j[topoB, #1, #2, #3, #4, #5] - #5*(2*m2 - pp)*
+      j[topoB, #1, #2, #3, #4, 1 + #5] + #2*j[topoB, #1, 1 + #2, -1 + #3, #4, 
+       #5] - 2*m2*#2*j[topoB, #1, 1 + #2, #3, #4, #5], 
+    -(#4*j[topoB, -1 + #1, #2, #3, 1 + #4, #5]) - 
+     #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] + 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + 
+     #4*j[topoB, #1, #2, -1 + #3, 1 + #4, #5] + 
+     (-#1 + #3)*j[topoB, #1, #2, #3, #4, #5] - 
+     #4*j[topoB, #1, #2, #3, 1 + #4, -1 + #5] - 
+     #4*(2*m2 - pp)*j[topoB, #1, #2, #3, 1 + #4, #5] - 
+     #1*j[topoB, 1 + #1, -1 + #2, #3, #4, #5] + 
+     #1*j[topoB, 1 + #1, #2, -1 + #3, #4, #5] - 
+     2*m2*#1*j[topoB, 1 + #1, #2, #3, #4, #5], 
+    #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] - 
+     #5*j[topoB, #1, -1 + #2, #3, #4, 1 + #5] - 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + (d - 2*#2 - #3 - #5)*
+      j[topoB, #1, #2, #3, #4, #5] - #5*(2*m2 - pp)*j[topoB, #1, #2, #3, #4, 
+       1 + #5] - 2*m2*#2*j[topoB, #1, 1 + #2, #3, #4, #5], 
+    -(#4*j[topoB, -1 + #1, #2, #3, 1 + #4, #5]) - 
+     #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] + 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + 
+     (-#1 + #4)*j[topoB, #1, #2, #3, #4, #5] + 
+     #4*pp*j[topoB, #1, #2, #3, 1 + #4, #5] + 
+     #3*j[topoB, #1, #2, 1 + #3, -1 + #4, #5] - 
+     #3*j[topoB, #1, #2, 1 + #3, #4, -1 + #5] + 
+     #1*j[topoB, 1 + #1, #2, #3, -1 + #4, #5] - 
+     #1*pp*j[topoB, 1 + #1, #2, #3, #4, #5], 
+    #3*j[topoB, -1 + #1, #2, 1 + #3, #4, #5] - 
+     #5*j[topoB, #1, -1 + #2, #3, #4, 1 + #5] - 
+     #3*j[topoB, #1, -1 + #2, 1 + #3, #4, #5] + 
+     (-#2 + #5)*j[topoB, #1, #2, #3, #4, #5] + 
+     #5*pp*j[topoB, #1, #2, #3, #4, 1 + #5] - 
+     #3*j[topoB, #1, #2, 1 + #3, -1 + #4, #5] + 
+     #3*j[topoB, #1, #2, 1 + #3, #4, -1 + #5] + 
+     #2*j[topoB, #1, 1 + #2, #3, #4, -1 + #5] - 
+     #2*pp*j[topoB, #1, 1 + #2, #3, #4, #5]} & 
+topoB /: Information[topoB] := (If[ValueQ[topoB::usage], 
+    Information[topoB, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[topoB] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[topoB, __]]] :> 
+           HoldForm[LiteRed`Private`f$[topoB, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[topoB, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  topoB], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+topoB /: jRules[topoB, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 0, 0, 0, 1, 1]"}]]
+topoB /: jRules[topoB, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 0, 0, 1, 1, 1]"}]]
+topoB /: jRules[topoB, 0, 1, 0, 1, 0] := 
+  {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+     (n4_)?Positive, (n5_)?NonPositive] :> 
+    Expand[j[topoB, n5, n1, 0, n2, n4]/(j[topoB, -1, 0, 0, 0, 0] + 
+        j[topoB, 0, -1, 0, 0, 0] - j[topoB, 0, 0, -1, 0, 0] + 
+        j[topoB, 0, 0, 0, -1, 0] + j[topoB, 0, 0, 0, 0, -1] + 
+        (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^n3]}
+topoB /: jRules[topoB, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 0, 1, 0, 1, 1]"}]]
+topoB /: jRules[topoB, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 0, 1, 1, 1, 0]"}]]
+topoB /: jRules[topoB, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 0, 1, 1, 1, 1]"}]]
+topoB /: jRules[topoB, 1, 0, 0, 0, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+     (n4_)?NonPositive, (n5_)?Positive] :> 
+    Expand[j[topoB, n4, n2, 0, n1, n5]/(j[topoB, -1, 0, 0, 0, 0] + 
+        j[topoB, 0, -1, 0, 0, 0] - j[topoB, 0, 0, -1, 0, 0] + 
+        j[topoB, 0, 0, 0, -1, 0] + j[topoB, 0, 0, 0, 0, -1] + 
+        (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^n3]}
+topoB /: jRules[topoB, 1, 0, 0, 1, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+     (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, n4]]}
+topoB /: jRules[topoB, 1, 0, 1, 0, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+     (n4_)?NonPositive, (n5_)?Positive] :> 
+    Expand[j[topoB, n4, n5, n3, n1, n2]]}
+topoB /: jRules[topoB, 1, 0, 1, 1, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+     (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, n4]]}
+topoB /: jRules[topoB, 1, 1, 0, 0, 0] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+     (n4_)?NonPositive, (n5_)?NonPositive] :> 
+    Expand[j[topoB, n5, n4, n3, n2, n1]]}
+topoB /: jRules[topoB, 1, 1, 0, 0, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+     (n4_)?NonPositive, (n5_)?Positive] :> 
+    Expand[j[topoB, n4, n5, n3, n1, n2]]}
+topoB /: jRules[topoB, 1, 1, 0, 1, 0] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+     (n4_)?Positive, (n5_)?NonPositive] :> 
+    Expand[j[topoB, n5, n4, n3, n2, n1]]}
+topoB /: jRules[topoB, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 1, 1, 0, 1, 1]"}]]
+topoB /: jRules[topoB, 1, 1, 1, 0, 0] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+     (n4_)?NonPositive, (n5_)?NonPositive] :> 
+    Expand[j[topoB, n5, n4, n3, n2, n1]]}
+topoB /: jRules[topoB, 1, 1, 1, 0, 1] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+     (n4_)?NonPositive, (n5_)?Positive] :> 
+    Expand[j[topoB, n4, n5, n3, n1, n2]]}
+topoB /: jRules[topoB, 1, 1, 1, 1, 0] := 
+  {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+     (n5_)?NonPositive] :> Expand[j[topoB, n5, n4, n3, n2, n1]]}
+topoB /: jRules[topoB, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoB], "jRules[topoB, 1, 1, 1, 1, 1]"}]]
+topoB /: jsOrder[topoB] := {"np", "cp", "-ds", "-ns"}
+topoB /: jsOrder[topoB, 0, 0, 0, 0, 1] := {{-1, -1, -1, -1, 1}, 
+   {-1, -1, -1, -1, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 0, 0, 0, 1, 0] := {{-1, -1, -1, 1, -1}, 
+   {-1, -1, -1, 0, -1}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 0, 0, 0, 1, 1] := {{-1, -1, -1, 1, 1}, 
+   {-1, -1, -1, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 0, 1, 0, 1] := {{-1, -1, 1, -1, 1}, 
+   {-1, -1, 0, -1, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 0, 1, 1, 0] := {{-1, -1, 1, 1, -1}, 
+   {-1, -1, 0, 0, -1}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 0, 1, 1, 1] := {{-1, -1, 1, 1, 1}, 
+   {-1, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 0, 0, 1] := {{-1, 1, -1, -1, 1}, 
+   {-1, 0, -1, -1, 0}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 0, 1, 0] := {{-1, 1, -1, 1, -1}, 
+   {-1, 0, -1, 0, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 0, 1, 1] := {{-1, 1, -1, 1, 1}, 
+   {-1, 0, -1, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 1, 0, 0] := {{-1, 1, 1, -1, -1}, 
+   {-1, 0, 0, -1, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 0, 1, 0}}
+topoB /: jsOrder[topoB, 0, 1, 1, 0, 1] := {{-1, 1, 1, -1, 1}, 
+   {-1, 0, 0, -1, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 1, 1, 0] := {{-1, 1, 1, 1, -1}, 
+   {-1, 0, 0, 0, -1}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}}
+topoB /: jsOrder[topoB, 0, 1, 1, 1, 1] := {{-1, 1, 1, 1, 1}, 
+   {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}}
+topoB /: jsOrder[topoB, 1, 0, 0, 0, 1] := {{1, -1, -1, -1, 1}, 
+   {0, -1, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 1, 0, 0, 1, 1] := {{1, -1, -1, 1, 1}, 
+   {0, -1, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, 0, -1, 0}, {0, 1, 0, 0, 0}}
+topoB /: jsOrder[topoB, 1, 0, 1, 1, 1] := {{1, -1, 1, 1, 1}, 
+   {0, -1, 0, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}}
+topoB /: jsOrder[topoB, 1, 1, 0, 0, 0] := {{1, 1, -1, -1, -1}, 
+   {0, 0, -1, -1, -1}, {-1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 0}}
+topoB /: jsOrder[topoB, 1, 1, 0, 0, 1] := {{1, 1, -1, -1, 1}, 
+   {0, 0, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 1, 1, 0, 1, 0] := {{1, 1, -1, 1, -1}, 
+   {0, 0, -1, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topoB /: jsOrder[topoB, 1, 1, 0, 1, 1] := {{1, 1, -1, 1, 1}, 
+   {0, 0, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 0, -1, 0}}
+topoB /: jsOrder[topoB, 1, 1, 1, 0, 1] := {{1, 1, 1, -1, 1}, 
+   {0, 0, 0, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}}
+topoB /: jsOrder[topoB, 1, 1, 1, 1, 0] := {{1, 1, 1, 1, -1}, 
+   {0, 0, 0, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}}
+topoB /: jsOrder[topoB, 1, 1, 1, 1, 1] := {{1, 1, 1, 1, 1}, {-1, 0, 0, 0, 0}, 
+   {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}}
+topoB /: jSymmetries[topoB, 0, 0, 0, 1, 1] := 
+  {{j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, 
+       n5]]}, {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, 
+      (n3_)?NonPositive, (n4_)?Positive, (n5_)?Positive] :> 
+     Expand[j[topoB, n1, 0, 0, n4, n5]/
+       ((-j[topoB, 0, 0, -1, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 4*m2*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, 0, -1, 0, 0, 0] + 2*j[topoB, 0, 0, 0, 0, -1] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n2)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, 0, n3, n4, n5]/
+       ((-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1*(-j[topoB, 0, -1, 0, 0, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 2*pp*j[topoB, 0, 0, 0, 0, 0])^n2)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, n2, 0, n4, n5]/
+       ((-j[topoB, 0, 0, -1, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 4*m2*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, 
+       n4]]}, {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, 
+      (n3_)?NonPositive, (n4_)?Positive, (n5_)?Positive] :> 
+     Expand[j[topoB, 0, n1, 0, n5, n4]/
+       ((-j[topoB, 0, 0, -1, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 4*m2*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n2)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, 0, n3, n5, n4]/
+       ((-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n2*(-j[topoB, 0, -1, 0, 0, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, 0, 0, n5, n4]/
+       ((-j[topoB, 0, 0, -1, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 4*m2*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, 0, -1, 0, 0, 0] + 2*j[topoB, 0, 0, 0, 0, -1] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}}
+topoB /: jSymmetries[topoB, 0, 0, 1, 1, 1] := 
+  {{j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, 
+       n5]]}, {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, 0, n3, n4, n5]/
+       ((-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1*(-j[topoB, 0, -1, 0, 0, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 2*pp*j[topoB, 0, 0, 0, 0, 0])^n2)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, 
+       n4]]}, {j[topoB, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, 0, n3, n5, n4]/
+       ((-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n2*(-j[topoB, 0, -1, 0, 0, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}}
+topoB /: jSymmetries[topoB, 0, 1, 0, 1, 1] := 
+  {{j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, 
+       n5]]}, {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, n2, 0, n4, n5]/
+       ((-j[topoB, 0, 0, -1, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*j[topoB, 0, 0, 0, 0, -1] + 4*m2*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n5, 0, n4, n2]/
+       (j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] - 
+         j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] + 
+         j[topoB, 0, 0, 0, 0, -1] + (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^
+        n3]}, {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, 0, n5, 0, n4, n2]/
+       ((-j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] + 
+          j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] - 
+          j[topoB, 0, 0, 0, 0, -1] + pp*j[topoB, 0, 0, 0, 0, 0])^n3*
+        (-j[topoB, -1, 0, 0, 0, 0] + 2*j[topoB, 0, 0, 0, -1, 0] + 
+          2*pp*j[topoB, 0, 0, 0, 0, 0])^n1)]}}
+topoB /: jSymmetries[topoB, 0, 1, 1, 1, 0] := 
+  {{j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?NonPositive] :> 
+     Expand[j[topoB, n1, n2, n3, n4, n5]]}, 
+   {j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?NonPositive] :> 
+     Expand[j[topoB, n5, n4, n3, n2, n1]]}}
+topoB /: jSymmetries[topoB, 0, 1, 1, 1, 1] := 
+  {{j[topoB, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, 
+       n5]]}}
+topoB /: jSymmetries[topoB, 1, 1, 0, 1, 1] := 
+  {{j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, 
+       n5]]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n1, n5, 0, n4, n2]/
+       (j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] - 
+         j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] + 
+         j[topoB, 0, 0, 0, 0, -1] + (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^
+        n3]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, 
+       n4]]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n4, n5, n3, n1, 
+       n2]]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n5, n4, n3, n2, 
+       n1]]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n5, n1, 0, n2, n4]/
+       (j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] - 
+         j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] + 
+         j[topoB, 0, 0, 0, 0, -1] + (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^
+        n3]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n4, n2, 0, n1, n5]/
+       (j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] - 
+         j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] + 
+         j[topoB, 0, 0, 0, 0, -1] + (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^
+        n3]}, {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive] :> Expand[j[topoB, n2, n4, 0, n5, n1]/
+       (j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 0] - 
+         j[topoB, 0, 0, -1, 0, 0] + j[topoB, 0, 0, 0, -1, 0] + 
+         j[topoB, 0, 0, 0, 0, -1] + (4*m2 - pp)*j[topoB, 0, 0, 0, 0, 0])^n3]}}
+topoB /: jSymmetries[topoB, 1, 1, 1, 1, 1] := 
+  {{j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] :> Expand[j[topoB, n1, n2, n3, n4, n5]]}, 
+   {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] :> Expand[j[topoB, n2, n1, n3, n5, n4]]}, 
+   {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] :> Expand[j[topoB, n4, n5, n3, n1, n2]]}, 
+   {j[topoB, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] :> Expand[j[topoB, n5, n4, n3, n2, n1]]}}
+topoB /: LI[topoB] := {} & 
+topoB /: LMs[topoB] := {k1, k2}
+topoB /: MappedSectors[topoB] := {js[topoB, 0, 1, 0, 1, 0], 
+   js[topoB, 1, 0, 0, 0, 1], js[topoB, 1, 1, 0, 0, 0], 
+   js[topoB, 1, 0, 0, 1, 1], js[topoB, 1, 0, 1, 0, 1], 
+   js[topoB, 1, 1, 0, 0, 1], js[topoB, 1, 1, 0, 1, 0], 
+   js[topoB, 1, 1, 1, 0, 0], js[topoB, 1, 0, 1, 1, 1], 
+   js[topoB, 1, 1, 1, 0, 1], js[topoB, 1, 1, 1, 1, 0]}
+topoB /: MIs[topoB] := {j[topoB, 0, 0, 0, 1, 1], j[topoB, 0, 1, 0, 1, 1], 
+   j[topoB, 0, 1, 1, 1, 0], j[topoB, 0, 2, 1, 1, 0], j[topoB, 1, 1, 0, 1, 1]}
+topoB /: NDs[topoB] := 5
+topoB /: NonZeroSectors[topoB] := {js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 0, 1, 0, 1, 0], js[topoB, 1, 0, 0, 0, 1], 
+   js[topoB, 1, 1, 0, 0, 0], js[topoB, 0, 0, 1, 1, 1], 
+   js[topoB, 0, 1, 0, 1, 1], js[topoB, 0, 1, 1, 1, 0], 
+   js[topoB, 1, 0, 0, 1, 1], js[topoB, 1, 0, 1, 0, 1], 
+   js[topoB, 1, 1, 0, 0, 1], js[topoB, 1, 1, 0, 1, 0], 
+   js[topoB, 1, 1, 1, 0, 0], js[topoB, 0, 1, 1, 1, 1], 
+   js[topoB, 1, 0, 1, 1, 1], js[topoB, 1, 1, 0, 1, 1], 
+   js[topoB, 1, 1, 1, 0, 1], js[topoB, 1, 1, 1, 1, 0], 
+   js[topoB, 1, 1, 1, 1, 1]}
+topoB /: Parameters[topoB] := {m2, pp, d}
+topoB /: PowerShifts[topoB] := {0, 0, 0, 0, 0}
+topoB /: SectorsMappings[topoB] := 
+  {js[topoB, 1, 0, 1, 1, 1] -> js[topoB, 0, 1, 1, 1, 1], 
+   js[topoB, 1, 1, 1, 0, 1] -> js[topoB, 0, 1, 1, 1, 1], 
+   js[topoB, 1, 1, 1, 1, 0] -> js[topoB, 0, 1, 1, 1, 1], 
+   js[topoB, 1, 0, 1, 0, 1] -> js[topoB, 0, 1, 1, 1, 0], 
+   js[topoB, 1, 0, 0, 1, 1] -> js[topoB, 0, 1, 0, 1, 1], 
+   js[topoB, 1, 1, 0, 0, 1] -> js[topoB, 0, 1, 0, 1, 1], 
+   js[topoB, 1, 1, 0, 1, 0] -> js[topoB, 0, 1, 0, 1, 1], 
+   js[topoB, 1, 1, 1, 0, 0] -> js[topoB, 0, 0, 1, 1, 1], 
+   js[topoB, 1, 1, 0, 0, 0] -> js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 0, 1, 0, 1, 0] -> js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 1, 0, 0, 0, 1] -> js[topoB, 0, 0, 0, 1, 1]}
+topoB /: SectorsPattern[topoB] := {___}
+topoB /: SimpleSectors[topoB] := {js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 0, 1, 0, 1, 0], js[topoB, 1, 0, 0, 0, 1], 
+   js[topoB, 1, 1, 0, 0, 0]}
+topoB /: SPs[topoB] := {sp[k1, k1], sp[k1, k2], sp[k1, p], sp[k2, k2], 
+   sp[k2, p]}
+topoB /: SR[topoB] := Get[FileNameJoin[{BasisDirectory[topoB], "SR[topoB]"}]]
+topoB /: Toj[topoB] := {sp[k1, k1] -> m2 + j[topoB, -1, 0, 0, 0, 0], 
+   sp[k1, k2] -> (2*m2 + j[topoB, -1, 0, 0, 0, 0] + j[topoB, 0, -1, 0, 0, 
+       0] - j[topoB, 0, 0, -1, 0, 0])/2, 
+   sp[k1, p] -> (pp + j[topoB, -1, 0, 0, 0, 0] - j[topoB, 0, 0, 0, -1, 0])/2, 
+   sp[k2, k2] -> m2 + j[topoB, 0, -1, 0, 0, 0], 
+   sp[k2, p] -> (pp + j[topoB, 0, -1, 0, 0, 0] - j[topoB, 0, 0, 0, 0, -1])/2}
+topoB /: UniqueSectors[topoB] := {js[topoB, 0, 0, 0, 1, 1], 
+   js[topoB, 0, 0, 1, 1, 1], js[topoB, 0, 1, 0, 1, 1], 
+   js[topoB, 0, 1, 1, 1, 0], js[topoB, 0, 1, 1, 1, 1], 
+   js[topoB, 1, 1, 0, 1, 1], js[topoB, 1, 1, 1, 1, 1]}
+topoB /: ZerojRule[topoB] := LiteRed`Private`jjj:j[topoB, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 0, 1, 1, 0}, {0, 1, 1, 0, 1}}]
+topoB /: ZeroSectors[topoB] := {js[topoB, 0, 0, 0, 0, 0], 
+   js[topoB, 0, 0, 0, 0, 1], js[topoB, 0, 0, 0, 1, 0], 
+   js[topoB, 0, 0, 1, 0, 0], js[topoB, 0, 1, 0, 0, 0], 
+   js[topoB, 1, 0, 0, 0, 0], js[topoB, 0, 0, 1, 0, 1], 
+   js[topoB, 0, 0, 1, 1, 0], js[topoB, 0, 1, 0, 0, 1], 
+   js[topoB, 0, 1, 1, 0, 0], js[topoB, 1, 0, 0, 1, 0], 
+   js[topoB, 1, 0, 1, 0, 0], js[topoB, 0, 1, 1, 0, 1], 
+   js[topoB, 1, 0, 1, 1, 0]}
+topoB /: SectorsMappings[topoB, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[topoB], HoldPattern[js[topoB, LiteRed`Private`ns$] -> 
+     _]]
+topoB::usage = "2-loop basis with 1 external momenta.\nUse Information[topoB] \
+to get basis summary.\nThis string can be redefined by setting \
+topoB::usage=\"\[Ellipsis]\""; Information[topoB, LongForm -> False]; 
+LiteRed`Private`CheckDefs[topoB]
+BasisDirectory[topoB]
