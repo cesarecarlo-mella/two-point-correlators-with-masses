@@ -1,0 +1,88 @@
+BasisDirectory[topoA] = StringDrop[DirectoryName[$Input], -1]
+topoA /: BasisSectors[topoA] := {js[topoA, 0, 1], js[topoA, 1, 0]}
+topoA /: CurrentState[topoA] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+topoA /: CutDs[topoA] := {0, 0}
+topoA /: Definitions[topoA] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+topoA /: Ds[topoA] := {-m2 + sp[k1, k1], -m2 + pp + sp[k1, k1] - 2*sp[k1, p]}
+topoA /: DsBasisQ[topoA] := True
+topoA /: EMs[topoA] := {p}
+topoA /: ExtMappedSectors[topoA] := {}
+topoA /: ExtSectorsMappings[topoA] := {}
+topoA /: IBP[topoA] := {-(#2*j[topoA, -1 + #1, 1 + #2]) + 
+     (d - 2*#1 - #2)*j[topoA, #1, #2] - #2*(2*m2 - pp)*j[topoA, #1, 1 + #2] - 
+     2*m2*#1*j[topoA, 1 + #1, #2], -(#2*j[topoA, -1 + #1, 1 + #2]) + 
+     (-#1 + #2)*j[topoA, #1, #2] + #2*pp*j[topoA, #1, 1 + #2] + 
+     #1*j[topoA, 1 + #1, -1 + #2] - #1*pp*j[topoA, 1 + #1, #2]} & 
+topoA /: Information[topoA] := (If[ValueQ[topoA::usage], 
+    Information[topoA, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[topoA] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[topoA, __]]] :> 
+           HoldForm[LiteRed`Private`f$[topoA, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[topoA, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  topoA], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+topoA /: jRules[topoA, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoA], "jRules[topoA, 0, 1]"}]]
+topoA /: jRules[topoA, 1, 0] := 
+  {j[topoA, (n1_)?Positive, (n2_)?NonPositive] :> Expand[j[topoA, n2, n1]]}
+topoA /: jRules[topoA, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topoA], "jRules[topoA, 1, 1]"}]]
+topoA /: jsOrder[topoA] := {"np", "cp", "-ds", "-ns"}
+topoA /: jsOrder[topoA, 0, 0] := {{-1, -1}, {1, 0}}
+topoA /: jsOrder[topoA, 0, 1] := {{-1, 1}, {-1, 0}}
+topoA /: jsOrder[topoA, 1, 0] := {{1, -1}, {0, -1}}
+topoA /: jsOrder[topoA, 1, 1] := {{1, 1}, {-1, 0}}
+topoA /: jSymmetries[topoA, 0, 1] := 
+  {{j[topoA, (n1_)?NonPositive, (n2_)?Positive] :> Expand[j[topoA, n1, n2]]}, 
+   {j[topoA, (n1_)?NonPositive, (n2_)?Positive] :> 
+     Expand[j[topoA, 0, n2]/(-j[topoA, -1, 0] + 2*j[topoA, 0, -1] + 
+         2*pp*j[topoA, 0, 0])^n1]}}
+topoA /: jSymmetries[topoA, 1, 1] := 
+  {{j[topoA, (n1_)?Positive, (n2_)?Positive] :> Expand[j[topoA, n1, n2]]}, 
+   {j[topoA, (n1_)?Positive, (n2_)?Positive] :> Expand[j[topoA, n2, n1]]}}
+topoA /: LI[topoA] := {} & 
+topoA /: LMs[topoA] := {k1}
+topoA /: MappedSectors[topoA] := {js[topoA, 1, 0]}
+topoA /: MIs[topoA] := {j[topoA, 0, 1], j[topoA, 1, 1]}
+topoA /: NDs[topoA] := 2
+topoA /: NonZeroSectors[topoA] := {js[topoA, 0, 1], js[topoA, 1, 0], 
+   js[topoA, 1, 1]}
+topoA /: Parameters[topoA] := {m2, pp, d}
+topoA /: PowerShifts[topoA] := {0, 0}
+topoA /: SectorsMappings[topoA] := {js[topoA, 1, 0] -> js[topoA, 0, 1]}
+topoA /: SectorsPattern[topoA] := {___}
+topoA /: SimpleSectors[topoA] := {js[topoA, 0, 1], js[topoA, 1, 0]}
+topoA /: SPs[topoA] := {sp[k1, k1], sp[k1, p]}
+topoA /: SR[topoA] := Get[FileNameJoin[{BasisDirectory[topoA], "SR[topoA]"}]]
+topoA /: Toj[topoA] := {sp[k1, k1] -> m2 + j[topoA, -1, 0], 
+   sp[k1, p] -> (pp + j[topoA, -1, 0] - j[topoA, 0, -1])/2}
+topoA /: UniqueSectors[topoA] := {js[topoA, 0, 1], js[topoA, 1, 1]}
+topoA /: ZerojRule[topoA] := LiteRed`Private`jjj:j[topoA, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ {{0, 0}}]
+topoA /: ZeroSectors[topoA] := {js[topoA, 0, 0]}
+topoA /: SectorsMappings[topoA, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[topoA], HoldPattern[js[topoA, LiteRed`Private`ns$] -> 
+     _]]
+topoA::usage = "1-loop basis with 1 external momenta.\nUse Information[topoA] \
+to get basis summary.\nThis string can be redefined by setting \
+topoA::usage=\"\[Ellipsis]\""; Information[topoA, LongForm -> False]; 
+LiteRed`Private`CheckDefs[topoA]
+BasisDirectory[topoA]

@@ -1,0 +1,11 @@
+Last[{{{1, 1}, {-1, 0}}, {j[topoA, (n1_)?Positive, (n2_)?Positive] /; 
+     n1 != 1 :> (-2*m2*n2*j[topoA, -2 + n1, 1 + n2])/
+      ((-1 + n1)*(4*m2 - pp)*pp) + 
+     ((2*m2 - 2*m2*n1 + 2*m2*n2 + pp + d*pp - n1*pp - 2*n2*pp)*
+       j[topoA, -1 + n1, n2])/((-1 + n1)*(4*m2 - pp)*pp) + 
+     ((2*m2 - pp)*j[topoA, n1, -1 + n2])/((4*m2 - pp)*pp), 
+   j[topoA, (n1_)?Positive, (n2_)?Positive] /; n1 == 1 && n2 != 1 :> 
+    ((2*m2 - pp)*j[topoA, 0, n2])/((4*m2 - pp)*pp) + 
+     ((4*m2 - 2*m2*n2 - pp + d*pp - n2*pp)*j[topoA, 1, -1 + n2])/
+      ((-1 + n2)*(4*m2 - pp)*pp) - (2*m2*j[topoA, 2, -2 + n2])/
+      ((-1 + n2)*(4*m2 - pp)*pp)}}]
