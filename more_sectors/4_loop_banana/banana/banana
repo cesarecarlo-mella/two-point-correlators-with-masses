@@ -1,0 +1,85 @@
+BasisDirectory[banana] = StringDrop[DirectoryName[$Input], -1]
+banana /: CurrentState[banana] := <|NewDsBasis -> True, GenerateIBP -> False, 
+   AnalyzeSectors -> False, FindSymmetries -> False|>
+banana /: CutDs[banana] := {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+banana /: Definitions[banana] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[k3], Declare[k3, Vector]], Hold[VecQ[k4], Declare[k4, Vector]], 
+   Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+banana /: Ds[banana] := {-m2 + pp + sp[k1, k1] + 2*sp[k1, p], 
+   -m2 + sp[k1, k1] + 2*sp[k1, k2] + sp[k2, k2], -m2 + sp[k2, k2], 
+   -m2 + sp[k2, k2] + 2*sp[k2, k3] + sp[k3, k3], -m2 + sp[k4, k4], 
+   -m2 + sp[k3, k3] + 2*sp[k3, k4] + sp[k4, k4], sp[k1, k2], sp[k1, k3], 
+   sp[k1, k4], sp[k3, k3], sp[k2, p], sp[k3, p], sp[k4, p], sp[k2, k4]}
+banana /: DsBasisQ[banana] := True
+banana /: EMs[banana] := {p}
+banana /: ExtMappedSectors[banana] := {}
+banana /: ExtSectorsMappings[banana] := {}
+banana /: Information[banana] := 
+  (If[ValueQ[banana::usage], Information[banana, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[banana] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[banana, __]]] :> 
+           HoldForm[LiteRed`Private`f$[banana, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[
+              banana, ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  banana], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+banana /: jsOrder[banana] := {"np", "cp", "-ds", "-ns"}
+banana /: LMs[banana] := {k1, k2, k3, k4}
+banana /: MappedSectors[banana] := 
+  Get[FileNameJoin[{BasisDirectory[banana], "MappedSectors[banana]"}]]
+banana /: MIs[banana] := Get[FileNameJoin[{BasisDirectory[banana], 
+     "MIs[banana]"}]]
+banana /: NDs[banana] := 14
+banana /: Parameters[banana] := {m2, pp, d}
+banana /: PowerShifts[banana] := {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+banana /: SectorsMappings[banana] := {}
+banana /: SectorsPattern[banana] := {___}
+banana /: SPs[banana] := {sp[k1, k1], sp[k1, k2], sp[k1, k3], sp[k1, k4], 
+   sp[k1, p], sp[k2, k2], sp[k2, k3], sp[k2, k4], sp[k2, p], sp[k3, k3], 
+   sp[k3, k4], sp[k3, p], sp[k4, k4], sp[k4, p]}
+banana /: SR[banana] := Get[FileNameJoin[{BasisDirectory[banana], 
+     "SR[banana]"}]]
+banana /: Toj[banana] := 
+  {sp[k1, k1] -> j[banana, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] - 
+     j[banana, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] - 
+     2*j[banana, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k1, k2] -> j[banana, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k1, k3] -> j[banana, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0], 
+   sp[k1, k4] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0], 
+   sp[k1, p] -> (m2 - pp + j[banana, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+       0] - j[banana, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[banana, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      2*j[banana, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0])/2, 
+   sp[k2, k2] -> m2 + j[banana, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k2, k3] -> (-j[banana, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[banana, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] - 
+      j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0])/2, 
+   sp[k2, k4] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1], 
+   sp[k2, p] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0], 
+   sp[k3, k3] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0], 
+   sp[k3, k4] -> (-j[banana, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0] + 
+      j[banana, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0] - 
+      j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0])/2, 
+   sp[k3, p] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0], 
+   sp[k4, k4] -> m2 + j[banana, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+   sp[k4, p] -> j[banana, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0]}
+banana::usage = "4-loop basis with 1 external momenta.\nUse \
+Information[banana] to get basis summary.\nThis string can be redefined by \
+setting banana::usage=\"\[Ellipsis]\""; Information[banana, 
+  LongForm -> False]; 
+LiteRed`Private`CheckDefs[banana]
+BasisDirectory[banana]
