@@ -1,0 +1,8 @@
+{{j[sunrise, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+    (n4_)?NonPositive, (n5_)?Positive] :> 
+   Expand[j[sunrise, n1, 0, n3, 0, n5]/((-j[sunrise, 0, 0, 0, -1, 0])^n4*
+      (-j[sunrise, 0, -1, 0, 0, 0] + 2*j[sunrise, 0, 0, -1, 0, 0] + 
+        2*j[sunrise, 0, 0, 0, 0, -1])^n2)]}, 
+ {j[sunrise, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+    (n4_)?NonPositive, (n5_)?Positive] :> 
+   Expand[j[sunrise, n1, n2, n3, n4, n5]]}}

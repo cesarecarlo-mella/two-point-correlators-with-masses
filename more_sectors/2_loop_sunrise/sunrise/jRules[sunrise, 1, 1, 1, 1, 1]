@@ -1,0 +1,75 @@
+Last[{{{1, 1, 1, 1, 1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 0, 0, -1, 0}}, 
+  {j[sunrise, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] /; n4 != 1 :> 
+    (n2*(m2 - pp)*j[sunrise, n1, 1 + n2, n3, -1 + n4, n5])/((-1 + n4)*pp) - 
+     (n5*(m2 - pp)^2*j[sunrise, 1 + n1, -1 + n2, n3, -1 + n4, 1 + n5])/
+      (2*m2*(-1 + n4)*pp) - (2*n3*j[sunrise, 1 + n1, -1 + n2, 1 + n3, 
+        -1 + n4, n5])/(-1 + n4) + (n5*(m2 - pp)^2*j[sunrise, 1 + n1, n2, 
+        -1 + n3, -1 + n4, 1 + n5])/(2*m2*(-1 + n4)*pp) + 
+     ((-(m2^2*n2) + m2^2*n5 - 2*m2*n2*pp + 4*m2*n3*pp - 2*m2*n5*pp - 
+        n2*pp^2 + n5*pp^2)*j[sunrise, 1 + n1, n2, n3, -1 + n4, n5])/
+      (2*m2*(-1 + n4)*pp) + j[sunrise, 1 + n1, n2, n3, n4, -1 + n5] + 
+     (2*n3*(m2 - pp)*j[sunrise, 1 + n1, n2, 1 + n3, -2 + n4, n5])/
+      ((-1 + n4)*pp) + (2*n3*j[sunrise, 1 + n1, n2, 1 + n3, -1 + n4, 
+        -1 + n5])/(-1 + n4) - (n2*(m2^2 - 6*m2*pp + pp^2)*
+       j[sunrise, 1 + n1, 1 + n2, -1 + n3, -1 + n4, n5])/
+      (2*m2*(-1 + n4)*pp) + (2*n2*(m2 - pp)*j[sunrise, 1 + n1, 1 + n2, n3, 
+        -2 + n4, n5])/((-1 + n4)*pp) - (n2*(m2^2 + 4*m2*pp - pp^2)*
+       j[sunrise, 1 + n1, 1 + n2, n3, -1 + n4, -1 + n5])/
+      (2*m2*(-1 + n4)*pp) - ((1 + n1)*(m2 - pp)^2*j[sunrise, 2 + n1, -1 + n2, 
+        n3, -1 + n4, n5])/(2*m2*(-1 + n4)*pp) + 
+     ((1 + n1)*(m2 - pp)^2*j[sunrise, 2 + n1, n2, -1 + n3, -1 + n4, n5])/
+      (2*m2*(-1 + n4)*pp) - ((1 + n1)*(m2 - pp)^2*j[sunrise, 2 + n1, n2, n3, 
+        -2 + n4, n5])/(m2*(-1 + n4)*pp) + 
+     ((1 + n1)*(m2 - pp)^2*j[sunrise, 2 + n1, n2, n3, -1 + n4, -1 + n5])/
+      (2*m2*(-1 + n4)*pp), j[sunrise, (n1_)?Positive, (n2_)?Positive, 
+      (n3_)?Positive, (n4_)?Positive, (n5_)?Positive] /; 
+     n4 == 1 && n1 != 1 :> 
+    ((1 + d - n1 - n2 - 2*n5)*j[sunrise, -1 + n1, n2, n3, 1, n5])/
+      ((-1 + n1)*(m2 - pp)) + (n2*j[sunrise, -1 + n1, 1 + n2, -1 + n3, 1, 
+        n5])/((-1 + n1)*(m2 - pp)) - 
+     (n2*j[sunrise, -1 + n1, 1 + n2, n3, 1, -1 + n5])/((-1 + n1)*(m2 - pp)) + 
+     j[sunrise, n1, n2, n3, 1, -1 + n5]/(-m2 + pp), 
+   j[sunrise, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] /; n1 == 1 && n4 == 1 && n5 != 1 :> 
+    (-2*m2*pp*j[sunrise, 0, 1 + n2, n3, 2, -1 + n5])/
+      ((-1 + n5)*(m2 - pp)^2) + (2*m2*(1 + n2)*j[sunrise, 0, 2 + n2, n3, 1, 
+        -1 + n5])/((-1 + n5)*(m2 - pp)) - 
+     (4*m2*n3*pp*j[sunrise, 1, n2, 1 + n3, 1, -1 + n5])/
+      ((-1 + n5)*(m2 - pp)^2) + j[sunrise, 1, 1 + n2, -1 + n3, 1, n5] + 
+     ((-2*m2^2 - m2^2*n2 + m2^2*n5 - 2*m2*n2*pp + 4*m2*n3*pp - 2*m2*n5*pp - 
+        2*pp^2 - n2*pp^2 + n5*pp^2)*j[sunrise, 1, 1 + n2, n3, 1, -1 + n5])/
+      ((-1 + n5)*(m2 - pp)^2) + (2*m2*pp*j[sunrise, 1, 1 + n2, n3, 2, 
+        -2 + n5])/((-1 + n5)*(m2 - pp)^2) + 
+     (4*m2*n3*j[sunrise, 1, 1 + n2, 1 + n3, 0, -1 + n5])/
+      ((-1 + n5)*(m2 - pp)) + (4*m2*n3*pp*j[sunrise, 1, 1 + n2, 1 + n3, 1, 
+        -2 + n5])/((-1 + n5)*(m2 - pp)^2) - 
+     ((1 + n2)*(m2^2 - 6*m2*pp + pp^2)*j[sunrise, 1, 2 + n2, -1 + n3, 1, 
+        -1 + n5])/((-1 + n5)*(m2 - pp)^2) + 
+     (4*m2*(1 + n2)*j[sunrise, 1, 2 + n2, n3, 0, -1 + n5])/
+      ((-1 + n5)*(m2 - pp)) - ((1 + n2)*(m2^2 + 4*m2*pp - pp^2)*
+       j[sunrise, 1, 2 + n2, n3, 1, -2 + n5])/((-1 + n5)*(m2 - pp)^2) + 
+     j[sunrise, 2, n2, n3, 1, -1 + n5]/(1 - n5) + 
+     j[sunrise, 2, 1 + n2, -1 + n3, 1, -1 + n5]/(-1 + n5) - 
+     (2*j[sunrise, 2, 1 + n2, n3, 0, -1 + n5])/(-1 + n5) + 
+     j[sunrise, 2, 1 + n2, n3, 1, -2 + n5]/(-1 + n5), 
+   j[sunrise, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] /; n1 == 1 && n4 == 1 && n5 == 1 && n2 != 1 :> 
+    -1/2*j[sunrise, 1, -2 + n2, n3, 1, 2]/(m2*(-1 + n2)) + 
+     j[sunrise, 1, -1 + n2, -1 + n3, 1, 2]/(2*m2*(-1 + n2)) + 
+     ((2 - n2)*j[sunrise, 1, -1 + n2, n3, 1, 1])/(2*m2*(-1 + n2)) - 
+     j[sunrise, 1, n2, -1 + n3, 1, 1]/(2*m2) + j[sunrise, 1, n2, n3, 1, 0]/
+      (2*m2) - j[sunrise, 2, -2 + n2, n3, 1, 1]/(2*m2*(-1 + n2)) + 
+     j[sunrise, 2, -1 + n2, -1 + n3, 1, 1]/(2*m2*(-1 + n2)) - 
+     j[sunrise, 2, -1 + n2, n3, 0, 1]/(m2*(-1 + n2)) + 
+     j[sunrise, 2, -1 + n2, n3, 1, 0]/(2*m2*(-1 + n2)), 
+   j[sunrise, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive] /; n1 == 1 && n2 == 1 && n4 == 1 && n5 == 1 && 
+      n3 != 1 :> j[sunrise, 1, 0, -1 + n3, 1, 2]/(2*m2*(-1 + n3)) - 
+     j[sunrise, 1, 1, -2 + n3, 1, 2]/(2*m2*(-1 + n3)) + 
+     ((d - 2*n3)*j[sunrise, 1, 1, -1 + n3, 1, 1])/(2*m2*(-1 + n3)) + 
+     j[sunrise, 2, 0, -1 + n3, 1, 1]/(2*m2*(-1 + n3)) - 
+     j[sunrise, 2, 1, -2 + n3, 1, 1]/(2*m2*(-1 + n3)) + 
+     j[sunrise, 2, 1, -1 + n3, 0, 1]/(m2*(-1 + n3)) - 
+     j[sunrise, 2, 1, -1 + n3, 1, 0]/(2*m2*(-1 + n3))}}]

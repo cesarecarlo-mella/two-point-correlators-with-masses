@@ -1,0 +1,261 @@
+BasisDirectory[sunrise] = StringDrop[DirectoryName[$Input], -1]
+sunrise /: BasisSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "BasisSectors[sunrise]"}]]
+sunrise /: CurrentState[sunrise] := <|NewDsBasis -> True, 
+   GenerateIBP -> True, AnalyzeSectors -> True, FindSymmetries -> False|>
+sunrise /: CutDs[sunrise] := {0, 0, 0, 0, 0}
+sunrise /: Definitions[sunrise] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[pp] === LiteRed`Private`ExpresionType[
+      pp], Declare[pp, LiteRed`Private`ExpresionType[pp]]], 
+   Hold[sp[p, p] === pp, sp[p, p] = pp]}
+sunrise /: Ds[sunrise] := {-m2 + pp + sp[k1, k1] + 2*sp[k1, p], 
+   -m2 + sp[k1, k1] + 2*sp[k1, k2] + sp[k2, k2], -m2 + sp[k2, k2], sp[k2, p], 
+   sp[k1, k1]}
+sunrise /: DsBasisQ[sunrise] := True
+sunrise /: EMs[sunrise] := {p}
+sunrise /: ExtMappedSectors[sunrise] := {}
+sunrise /: ExtSectorsMappings[sunrise] := {}
+sunrise /: IBP[sunrise] := Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "IBP[sunrise]"}]]
+sunrise /: Information[sunrise] := 
+  (If[ValueQ[sunrise::usage], Information[sunrise, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[sunrise] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[sunrise, __]]] :> 
+           HoldForm[LiteRed`Private`f$[sunrise, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[
+              sunrise, ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  sunrise], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+sunrise /: jRules[sunrise, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 0, 1, 0, 1, 1]"}]]
+sunrise /: jRules[sunrise, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 0, 1, 1, 0, 0]"}]]
+sunrise /: jRules[sunrise, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 0, 1, 1, 0, 1]"}]]
+sunrise /: jRules[sunrise, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 0, 1, 1, 1, 0]"}]]
+sunrise /: jRules[sunrise, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 0, 1, 1, 1, 1]"}]]
+sunrise /: jRules[sunrise, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 0, 1, 0, 0]"}]]
+sunrise /: jRules[sunrise, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 0, 1, 0, 1]"}]]
+sunrise /: jRules[sunrise, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 0, 1, 1, 0]"}]]
+sunrise /: jRules[sunrise, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 0, 1, 1, 1]"}]]
+sunrise /: jRules[sunrise, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 0, 0, 0]"}]]
+sunrise /: jRules[sunrise, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 0, 0, 1]"}]]
+sunrise /: jRules[sunrise, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 0, 1, 0]"}]]
+sunrise /: jRules[sunrise, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 0, 1, 1]"}]]
+sunrise /: jRules[sunrise, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 1, 0, 0]"}]]
+sunrise /: jRules[sunrise, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 1, 0, 1]"}]]
+sunrise /: jRules[sunrise, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 1, 1, 0]"}]]
+sunrise /: jRules[sunrise, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jRules[sunrise, 1, 1, 1, 1, 1]"}]]
+sunrise /: jsOrder[sunrise] := {"np", "cp", "-ds", "-ns"}
+sunrise /: jsOrder[sunrise, 0, 0, 0, 1, 1] := 
+  {{-1, -1, -1, 1, 1}, {-1, -1, -1, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 0, 1, 0, 0] := {{-1, -1, 1, -1, -1}, 
+   {-1, -1, 0, -1, -1}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 0, 0, 1, 0, 1] := 
+  {{-1, -1, 1, -1, 1}, {-1, -1, 0, -1, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 0, 1, 1, 0] := 
+  {{-1, -1, 1, 1, -1}, {-1, -1, 0, 0, -1}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 0, 1, 1, 1] := 
+  {{-1, -1, 1, 1, 1}, {-1, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}, 
+   {1, 0, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 0, 0, 0] := {{-1, 1, -1, -1, -1}, 
+   {-1, 0, -1, -1, -1}, {1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 0, 0, 1] := 
+  {{-1, 1, -1, -1, 1}, {-1, 0, -1, -1, 0}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 0, 1, 0] := 
+  {{-1, 1, -1, 1, -1}, {-1, 0, -1, 0, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 0, 1, 1] := 
+  {{-1, 1, -1, 1, 1}, {-1, 0, -1, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 0, -1, 0}, 
+   {1, 0, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 1, 0, 0] := 
+  {{-1, 1, 1, -1, -1}, {-1, 0, 0, -1, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, 
+   {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 1, 0, 1] := 
+  {{-1, 1, 1, -1, 1}, {-1, 0, 0, -1, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {1, 0, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 1, 1, 0] := 
+  {{-1, 1, 1, 1, -1}, {-1, 0, 0, 0, -1}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {1, 0, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 0, 1, 1, 1, 1] := 
+  {{-1, 1, 1, 1, 1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 0, 0, -1, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 0, 0, 1] := 
+  {{1, -1, -1, -1, 1}, {0, -1, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 0, 1, 0] := 
+  {{1, -1, -1, 1, -1}, {0, -1, -1, 0, -1}, {-1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 0, 1, 1] := 
+  {{1, -1, -1, 1, 1}, {0, -1, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, 0, -1, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 1, 0, 0] := 
+  {{1, -1, 1, -1, -1}, {0, -1, 0, -1, -1}, {-1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, 
+   {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 1, 0, 1] := 
+  {{1, -1, 1, -1, 1}, {0, -1, 0, -1, 0}, {-1, 0, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 1, 1, 0] := 
+  {{1, -1, 1, 1, -1}, {0, -1, 0, 0, -1}, {-1, 0, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 1, 0, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 0, 1, 1, 1] := 
+  {{1, -1, 1, 1, 1}, {0, -1, 0, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 0, 0, -1, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 0, 0, 0] := 
+  {{1, 1, -1, -1, -1}, {0, 0, -1, -1, -1}, {-1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, 
+   {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 0, 0, 1] := 
+  {{1, 1, -1, -1, 1}, {0, 0, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 0, 1, 0] := 
+  {{1, 1, -1, 1, -1}, {0, 0, -1, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, 1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 0, 1, 1] := 
+  {{1, 1, -1, 1, 1}, {0, 0, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, 0, -1, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 1, 0, 0] := 
+  {{1, 1, 1, -1, -1}, {0, 0, 0, -1, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, 0, 1, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 1, 0, 1] := 
+  {{1, 1, 1, -1, 1}, {0, 0, 0, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, -1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 1, 1, 0] := 
+  {{1, 1, 1, 1, -1}, {0, 0, 0, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, 
+   {0, 0, -1, 0, 0}}
+sunrise /: jsOrder[sunrise, 1, 1, 1, 1, 1] := 
+  {{1, 1, 1, 1, 1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 0, 0, -1, 0}}
+sunrise /: jSymmetries[sunrise, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 0, 1, 0, 1, 1]"}]]
+sunrise /: jSymmetries[sunrise, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 0, 1, 1, 0, 0]"}]]
+sunrise /: jSymmetries[sunrise, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 0, 1, 1, 0, 1]"}]]
+sunrise /: jSymmetries[sunrise, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 0, 1, 1, 1, 0]"}]]
+sunrise /: jSymmetries[sunrise, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 0, 1, 1, 1, 1]"}]]
+sunrise /: jSymmetries[sunrise, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 0, 1, 0, 1]"}]]
+sunrise /: jSymmetries[sunrise, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 0, 1, 1, 1]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 0, 1, 0]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 0, 1, 1]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 1, 0, 0]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 1, 0, 1]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 1, 1, 0]"}]]
+sunrise /: jSymmetries[sunrise, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "jSymmetries[sunrise, 1, 1, 1, 1, 1]"}]]
+sunrise /: LI[sunrise] := Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "LI[sunrise]"}]]
+sunrise /: LMs[sunrise] := {k1, k2}
+sunrise /: MappedSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "MappedSectors[sunrise]"}]]
+sunrise /: MIs[sunrise] := Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "MIs[sunrise]"}]]
+sunrise /: NDs[sunrise] := 5
+sunrise /: NonZeroSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "NonZeroSectors[sunrise]"}]]
+sunrise /: Parameters[sunrise] := {m2, pp, d}
+sunrise /: PowerShifts[sunrise] := {0, 0, 0, 0, 0}
+sunrise /: SectorsMappings[sunrise] := 
+  {js[sunrise, 1, 1, 0, 0, 1] -> js[sunrise, 1, 0, 1, 0, 1], 
+   js[sunrise, 1, 0, 1, 1, 0] -> js[sunrise, 0, 1, 1, 1, 0], 
+   js[sunrise, 1, 0, 1, 0, 0] -> js[sunrise, 0, 1, 1, 0, 0], 
+   js[sunrise, 1, 1, 0, 0, 0] -> js[sunrise, 0, 1, 1, 0, 0]}
+sunrise /: SectorsPattern[sunrise] := {___}
+sunrise /: SimpleSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "SimpleSectors[sunrise]"}]]
+sunrise /: SPs[sunrise] := {sp[k1, k1], sp[k1, k2], sp[k1, p], sp[k2, k2], 
+   sp[k2, p]}
+sunrise /: SR[sunrise] := Get[FileNameJoin[{BasisDirectory[sunrise], 
+     "SR[sunrise]"}]]
+sunrise /: Toj[sunrise] := {sp[k1, k1] -> j[sunrise, 0, 0, 0, 0, -1], 
+   sp[k1, k2] -> (j[sunrise, 0, -1, 0, 0, 0] - j[sunrise, 0, 0, -1, 0, 0] - 
+      j[sunrise, 0, 0, 0, 0, -1])/2, sp[k1, p] -> 
+    (m2 - pp + j[sunrise, -1, 0, 0, 0, 0] - j[sunrise, 0, 0, 0, 0, -1])/2, 
+   sp[k2, k2] -> m2 + j[sunrise, 0, 0, -1, 0, 0], 
+   sp[k2, p] -> j[sunrise, 0, 0, 0, -1, 0]}
+sunrise /: UniqueSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "UniqueSectors[sunrise]"}]]
+sunrise /: ZerojRule[sunrise] := LiteRed`Private`jjj:j[sunrise, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{0, 1, 0, 0, 1}, {0, 0, 1, 1, 1}, {1, 0, 0, 1, 1}, {0, 1, 0, 1, 0}}]
+sunrise /: ZeroSectors[sunrise] := 
+  Get[FileNameJoin[{BasisDirectory[sunrise], "ZeroSectors[sunrise]"}]]
+sunrise /: SectorsMappings[sunrise, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[sunrise], HoldPattern[
+    js[sunrise, LiteRed`Private`ns$] -> _]]
+sunrise::usage = "2-loop basis with 1 external momenta.\nUse \
+Information[sunrise] to get basis summary.\nThis string can be redefined by \
+setting sunrise::usage=\"\[Ellipsis]\""; Information[sunrise, 
+  LongForm -> False]; 
+LiteRed`Private`CheckDefs[sunrise]
+BasisDirectory[sunrise]
