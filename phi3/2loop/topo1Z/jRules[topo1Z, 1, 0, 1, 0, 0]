@@ -1,0 +1,6 @@
+{j[topo1Z, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+   (n4_)?NonPositive, (n5_)?NonPositive] :> 
+  Expand[j[topo1Z, 0, n4, n2, n3, n1]/(-j[topo1Z, -1, 0, 0, 0, 0] + 
+      j[topo1Z, 0, -1, 0, 0, 0] + j[topo1Z, 0, 0, -1, 0, 0] + 
+      j[topo1Z, 0, 0, 0, -1, 0] - j[topo1Z, 0, 0, 0, 0, -1] + 
+      j[topo1Z, 0, 0, 0, 0, 0]/z)^n5]}

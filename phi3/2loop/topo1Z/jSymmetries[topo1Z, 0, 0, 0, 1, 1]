@@ -1,0 +1,46 @@
+{{j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, n1, n2, n3, n4, n5]]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, n1, 0, 0, n4, n5]/
+     ((-j[topo1Z, 0, 0, -1, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + 2*m2*j[topo1Z, 0, 0, 0, 0, 0])^n3*
+      (-j[topo1Z, 0, -1, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, 0, -1] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n2)]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, 0, 0, n3, n4, n5]/
+     ((-j[topo1Z, -1, 0, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n1*(-j[topo1Z, 0, -1, 0, 0, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n2)]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, 0, n2, 0, n4, n5]/
+     ((-j[topo1Z, 0, 0, -1, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + 2*m2*j[topo1Z, 0, 0, 0, 0, 0])^n3*
+      (-j[topo1Z, -1, 0, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n1)]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, n2, n1, n3, n5, n4]]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, 0, n1, 0, n5, n4]/
+     ((-j[topo1Z, 0, 0, -1, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + 2*m2*j[topo1Z, 0, 0, 0, 0, 0])^n3*
+      (-j[topo1Z, -1, 0, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n2)]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, 0, 0, n3, n5, n4]/
+     ((-j[topo1Z, -1, 0, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n2*(-j[topo1Z, 0, -1, 0, 0, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n1)]}, 
+ {j[topo1Z, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+    (n4_)?Positive, (n5_)?Positive] :> 
+   Expand[j[topo1Z, n2, 0, 0, n5, n4]/
+     ((-j[topo1Z, 0, 0, -1, 0, 0] + 2*j[topo1Z, 0, 0, 0, -1, 0] + 
+        2*j[topo1Z, 0, 0, 0, 0, -1] + 2*m2*j[topo1Z, 0, 0, 0, 0, 0])^n3*
+      (-j[topo1Z, 0, -1, 0, 0, 0] + 2*j[topo1Z, 0, 0, 0, 0, -1] + 
+        (2*j[topo1Z, 0, 0, 0, 0, 0])/z)^n1)]}}

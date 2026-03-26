@@ -1,0 +1,8 @@
+{{j[topo1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?Positive] :> Expand[j[topo1, n1, n2, n3, n4, n5]]}, 
+ {j[topo1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?Positive] :> Expand[j[topo1, n2, n1, n3, n5, n4]]}, 
+ {j[topo1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?Positive] :> Expand[j[topo1, n4, n5, n3, n1, n2]]}, 
+ {j[topo1, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+    (n5_)?Positive] :> Expand[j[topo1, n5, n4, n3, n2, n1]]}}

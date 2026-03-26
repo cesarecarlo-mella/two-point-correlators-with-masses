@@ -1,0 +1,219 @@
+BasisDirectory[topo1Z] = StringDrop[DirectoryName[$Input], -1]
+topo1Z /: BasisSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "BasisSectors[topo1Z]"}]]
+topo1Z /: CurrentState[topo1Z] := <|NewDsBasis -> True, GenerateIBP -> True, 
+   AnalyzeSectors -> True, FindSymmetries -> False|>
+topo1Z /: CutDs[topo1Z] := {0, 0, 0, 0, 0}
+topo1Z /: Definitions[topo1Z] := {Hold[MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k1], Declare[k1, Vector]], Hold[VecQ[k2], Declare[k2, Vector]], 
+   Hold[VecQ[p], Declare[p, Vector]], 
+   Hold[LiteRed`Private`ExpresionType[p] === LiteRed`Private`ExpresionType[
+      p], Declare[p, LiteRed`Private`ExpresionType[p]]], 
+   Hold[LiteRed`Private`ExpresionType[z] === LiteRed`Private`ExpresionType[
+      z], Declare[z, LiteRed`Private`ExpresionType[z]]], 
+   Hold[sp[p, p] === z^(-1), sp[p, p] = z^(-1)]}
+topo1Z /: Ds[topo1Z] := {-m2 + sp[k1, k1], -m2 + sp[k2, k2], 
+   -m2 + sp[k1, k1] + 2*sp[k1, k2] + sp[k2, k2], -m2 + z^(-1) + sp[k1, k1] - 
+    2*sp[k1, p], -m2 + z^(-1) + sp[k2, k2] + 2*sp[k2, p]}
+topo1Z /: DsBasisQ[topo1Z] := True
+topo1Z /: EMs[topo1Z] := {p}
+topo1Z /: ExtMappedSectors[topo1Z] := {}
+topo1Z /: ExtSectorsMappings[topo1Z] := {}
+topo1Z /: IBP[topo1Z] := Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "IBP[topo1Z]"}]]
+topo1Z /: Information[topo1Z] := 
+  (If[ValueQ[topo1Z::usage], Information[topo1Z, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[topo1Z] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[topo1Z, __]]] :> 
+           HoldForm[LiteRed`Private`f$[topo1Z, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[
+              topo1Z, ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[
+                  topo1Z], HoldPattern[LiteRed`Private`a$_ :> 
+                    LiteRed`Private`b$_] /; MatchQ[LiteRed`Private`a$[[1,0]], 
+                   LiteRed`Private`x$[[1,0]]]] /. HoldPattern -> 
+                 HoldForm]]) & , Appearance -> "Frameless", 
+           BaseStyle -> "InformationLink"]}, {1}]], 5], 
+     DefaultBaseStyle -> "InfoGrid"]])
+topo1Z /: jRules[topo1Z, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 0, 0, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 0, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 0, 1, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 0, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 0, 1, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 0, 1, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 0, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 0, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 1, 0, 0]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 1, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 1, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 0, 1, 1, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 0, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 0, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 1, 0, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 1, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 1, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 0, 1, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 0, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 0, 0, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 0, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 0, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 0, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 0, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 0, 1, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 1, 0, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 1, 0, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 1, 0, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 1, 0, 1]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 1, 1, 0]"}]]
+topo1Z /: jRules[topo1Z, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "jRules[topo1Z, 1, 1, 1, 1, 1]"}]]
+topo1Z /: jsOrder[topo1Z] := {"np", "cp", "-ds", "-ns"}
+topo1Z /: jsOrder[topo1Z, 0, 0, 0, 0, 1] := {{-1, -1, -1, -1, 1}, 
+   {-1, -1, -1, -1, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 0, 0, 1, 0] := {{-1, -1, -1, 1, -1}, 
+   {-1, -1, -1, 0, -1}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 0, 0, 1, 1] := {{-1, -1, -1, 1, 1}, 
+   {-1, -1, -1, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 0, 1, 0, 1] := {{-1, -1, 1, -1, 1}, 
+   {-1, -1, 0, -1, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 0, 1, 1, 0] := {{-1, -1, 1, 1, -1}, 
+   {-1, -1, 0, 0, -1}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 0, 1, 1, 1] := {{-1, -1, 1, 1, 1}, 
+   {-1, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 0, 0, 1] := {{-1, 1, -1, -1, 1}, 
+   {-1, 0, -1, -1, 0}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 0, 1, 0] := {{-1, 1, -1, 1, -1}, 
+   {-1, 0, -1, 0, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 0, 1, 1] := {{-1, 1, -1, 1, 1}, 
+   {-1, 0, -1, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 0, -1, 0}, {1, 0, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 1, 0, 0] := {{-1, 1, 1, -1, -1}, 
+   {-1, 0, 0, -1, -1}, {0, -1, 0, 0, 0}, {1, 0, 0, 0, 0}, {0, 0, 0, 1, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 1, 0, 1] := {{-1, 1, 1, -1, 1}, 
+   {-1, 0, 0, -1, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 1, 1, 0] := {{-1, 1, 1, 1, -1}, 
+   {-1, 0, 0, 0, -1}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {1, 0, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 0, 1, 1, 1, 1] := {{-1, 1, 1, 1, 1}, 
+   {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 0, 0, 0, 1] := {{1, -1, -1, -1, 1}, 
+   {0, -1, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 0, 0, 1, 1] := {{1, -1, -1, 1, 1}, 
+   {0, -1, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, 0, -1, 0}, {0, 1, 0, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 0, 1, 1, 1] := {{1, -1, 1, 1, 1}, 
+   {0, -1, 0, 0, 0}, {-1, 0, 0, 0, 0}, {0, 0, -1, 0, 0}, {0, 0, 0, -1, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 0, 0, 0] := {{1, 1, -1, -1, -1}, 
+   {0, 0, -1, -1, -1}, {-1, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 0, 0, 1] := {{1, 1, -1, -1, 1}, 
+   {0, 0, -1, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 0, 1, 0] := {{1, 1, -1, 1, -1}, 
+   {0, 0, -1, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 0, 1, 1] := {{1, 1, -1, 1, 1}, 
+   {0, 0, -1, 0, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, 0, -1, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 1, 0, 1] := {{1, 1, 1, -1, 1}, 
+   {0, 0, 0, -1, 0}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 1, 1, 0] := {{1, 1, 1, 1, -1}, 
+   {0, 0, 0, 0, -1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}}
+topo1Z /: jsOrder[topo1Z, 1, 1, 1, 1, 1] := 
+  {{1, 1, 1, 1, 1}, {-1, 0, 0, 0, 0}, {0, -1, 0, 0, 0}, {0, 0, -1, 0, 0}, 
+   {0, 0, 0, -1, 0}}
+topo1Z /: jSymmetries[topo1Z, 0, 0, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 0, 0, 0, 1, 1]"}]]
+topo1Z /: jSymmetries[topo1Z, 0, 0, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 0, 0, 1, 1, 1]"}]]
+topo1Z /: jSymmetries[topo1Z, 0, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 0, 1, 0, 1, 1]"}]]
+topo1Z /: jSymmetries[topo1Z, 0, 1, 1, 1, 0] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 0, 1, 1, 1, 0]"}]]
+topo1Z /: jSymmetries[topo1Z, 0, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 0, 1, 1, 1, 1]"}]]
+topo1Z /: jSymmetries[topo1Z, 1, 1, 0, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 1, 1, 0, 1, 1]"}]]
+topo1Z /: jSymmetries[topo1Z, 1, 1, 1, 1, 1] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "jSymmetries[topo1Z, 1, 1, 1, 1, 1]"}]]
+topo1Z /: LI[topo1Z] := Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "LI[topo1Z]"}]]
+topo1Z /: LMs[topo1Z] := {k1, k2}
+topo1Z /: MappedSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "MappedSectors[topo1Z]"}]]
+topo1Z /: MIs[topo1Z] := Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "MIs[topo1Z]"}]]
+topo1Z /: NDs[topo1Z] := 5
+topo1Z /: NonZeroSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "NonZeroSectors[topo1Z]"}]]
+topo1Z /: Parameters[topo1Z] := {m2, z, d}
+topo1Z /: PowerShifts[topo1Z] := {0, 0, 0, 0, 0}
+topo1Z /: SectorsMappings[topo1Z] := 
+  {js[topo1Z, 1, 0, 1, 1, 1] -> js[topo1Z, 0, 1, 1, 1, 1], 
+   js[topo1Z, 1, 1, 1, 0, 1] -> js[topo1Z, 0, 1, 1, 1, 1], 
+   js[topo1Z, 1, 1, 1, 1, 0] -> js[topo1Z, 0, 1, 1, 1, 1], 
+   js[topo1Z, 1, 0, 1, 0, 1] -> js[topo1Z, 0, 1, 1, 1, 0], 
+   js[topo1Z, 1, 0, 0, 1, 1] -> js[topo1Z, 0, 1, 0, 1, 1], 
+   js[topo1Z, 1, 1, 0, 0, 1] -> js[topo1Z, 0, 1, 0, 1, 1], 
+   js[topo1Z, 1, 1, 0, 1, 0] -> js[topo1Z, 0, 1, 0, 1, 1], 
+   js[topo1Z, 0, 1, 1, 0, 1] -> js[topo1Z, 0, 1, 0, 1, 1], 
+   js[topo1Z, 1, 0, 1, 1, 0] -> js[topo1Z, 0, 1, 0, 1, 1], 
+   js[topo1Z, 1, 1, 1, 0, 0] -> js[topo1Z, 0, 0, 1, 1, 1], 
+   js[topo1Z, 1, 1, 0, 0, 0] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 0, 0, 1, 0, 1] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 0, 0, 1, 1, 0] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 0, 1, 0, 1, 0] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 0, 1, 1, 0, 0] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 1, 0, 0, 0, 1] -> js[topo1Z, 0, 0, 0, 1, 1], 
+   js[topo1Z, 1, 0, 1, 0, 0] -> js[topo1Z, 0, 0, 0, 1, 1]}
+topo1Z /: SectorsPattern[topo1Z] := {___}
+topo1Z /: SimpleSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "SimpleSectors[topo1Z]"}]]
+topo1Z /: SPs[topo1Z] := {sp[k1, k1], sp[k1, k2], sp[k1, p], sp[k2, k2], 
+   sp[k2, p]}
+topo1Z /: SR[topo1Z] := Get[FileNameJoin[{BasisDirectory[topo1Z], 
+     "SR[topo1Z]"}]]
+topo1Z /: Toj[topo1Z] := {sp[k1, k1] -> m2 + j[topo1Z, -1, 0, 0, 0, 0], 
+   sp[k1, k2] -> (-m2 - j[topo1Z, -1, 0, 0, 0, 0] - j[topo1Z, 0, -1, 0, 0, 
+       0] + j[topo1Z, 0, 0, -1, 0, 0])/2, 
+   sp[k1, p] -> -1/2*(-1 - z*j[topo1Z, -1, 0, 0, 0, 0] + 
+       z*j[topo1Z, 0, 0, 0, -1, 0])/z, sp[k2, k2] -> 
+    m2 + j[topo1Z, 0, -1, 0, 0, 0], sp[k2, p] -> 
+    -1/2*(1 + z*j[topo1Z, 0, -1, 0, 0, 0] - z*j[topo1Z, 0, 0, 0, 0, -1])/z}
+topo1Z /: UniqueSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "UniqueSectors[topo1Z]"}]]
+topo1Z /: ZerojRule[topo1Z] := LiteRed`Private`jjj:j[topo1Z, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 0, 0, 1, 0}, {0, 0, 1, 0, 0}, {0, 1, 0, 0, 1}}]
+topo1Z /: ZeroSectors[topo1Z] := 
+  Get[FileNameJoin[{BasisDirectory[topo1Z], "ZeroSectors[topo1Z]"}]]
+topo1Z /: SectorsMappings[topo1Z, LiteRed`Private`ns$:(0 | 1)..] := 
+  Cases[SectorsMappings[topo1Z], HoldPattern[
+    js[topo1Z, LiteRed`Private`ns$] -> _]]
+topo1Z::usage = "2-loop basis with 1 external momenta.\nUse \
+Information[topo1Z] to get basis summary.\nThis string can be redefined by \
+setting topo1Z::usage=\"\[Ellipsis]\""; Information[topo1Z, 
+  LongForm -> False]; 
+LiteRed`Private`CheckDefs[topo1Z]
+BasisDirectory[topo1Z]
